@@ -9,9 +9,21 @@
   imports =
     [
       # Include the results of the hardware scan.
-      # ./hardware-configuration.nix
-      # ./secrets.nix
+      ./hardware-configuration.nix
+      ./secrets.nix
     ];
+  # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
+  boot.loader.grub.enable = false;
+  # Enables the generation of /boot/extlinux/extlinux.conf
+  boot.loader.generic-extlinux-compatible.enable = true;
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It's perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "23.11"; # Did you read the comment?
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -21,7 +33,7 @@
     hostName = "rbpi-nixos"; # Define your hostname.
     networkmanager.enable = true;
     firewall = {
-      enable = true;
+      enable = false;
       allowedTCPPorts = [ 22 80 443 ];
     };
   };
@@ -76,12 +88,13 @@
   users.mutableUsers = false; # no mutable users
   users.users.liam = {
     isNormalUser = true;
-    # hashedPasswordFile = config.sops.secrets.hashedPassword.path;
+    hashedPasswordFile = config.sops.secrets.hashedPassword.path;
     extraGroups = [ "wheel" "docker" "networkmanager" ];
     shell = pkgs.zsh;
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkCexrVowwSF16fESmeH+7da4dQR5Xg6EO4O4iE6Zqo liam@liam-nixos"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJE5qK0Ec1oNs+5WdVf9B00MoZP647ZGHxkxbR3BrxSH liammurphy@Liams-MBP-10.domain"
     ];
   };
 
@@ -95,13 +108,6 @@
 
   system.copySystemConfiguration = false;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
 
 }
 
