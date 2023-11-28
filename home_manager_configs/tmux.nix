@@ -3,7 +3,7 @@
   programs.tmux = {
     enable = true;
     keyMode = "vi";
-    customPanelNavigationAndResize = true;
+    customPaneNavigationAndResize = true;
     mouse = true;
     terminal = "screen-256color";
   };
