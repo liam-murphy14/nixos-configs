@@ -2,7 +2,9 @@
   description = "NixOS system flake config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs = { 
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -16,11 +18,25 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, sops-nix }: {
     nixosConfigurations = {
+      old-hp-nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./old_hp/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.liam = import ./home.nix;
+          }
+          sops-nix.nixosModules.sops
+        ];
+      };
       rbpi-nixos = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          ./configuration.nix
+          ./rbpi/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

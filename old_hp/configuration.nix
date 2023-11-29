@@ -27,7 +27,7 @@
   hardware.pulseaudio.enable = true;
 
   # NETWORK
-  networking.hostName = "liam-nixos"; # Define your hostname.
+  networking.hostName = "old-hp-nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
   networking.firewall.enable = false;
   services.resolved = {
