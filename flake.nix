@@ -2,7 +2,7 @@
   description = "NixOS system flake config";
 
   inputs = {
-    nixpkgs = { 
+    nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
@@ -27,7 +27,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.liam = import ./home.nix;
+            home-manager.users.liam = import ./old_hp/home.nix;
           }
           sops-nix.nixosModules.sops
         ];
@@ -41,7 +41,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.liam = import ./home.nix;
+            home-manager.users.liam = import ./rbpi/home.nix;
           }
           sops-nix.nixosModules.sops
         ];
