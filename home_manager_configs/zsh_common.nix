@@ -5,6 +5,8 @@
 
     enable = true;
     defaultKeymap = "viins";
+    
+    initExtra = "HYPHEN_INSENSITIVE=\"true\"";
 
     oh-my-zsh = {
       enable = true;
