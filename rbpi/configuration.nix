@@ -34,8 +34,8 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 ];
-      allowedUDPPorts = [ 5353 ];
+      allowedTCPPorts = [ 22 80 443 8245 ];
+      allowedUDPPorts = [ 5353 8245 ];
     };
   };
   services.openssh = {
