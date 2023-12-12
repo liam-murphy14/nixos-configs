@@ -34,6 +34,9 @@
     # NIX
     nil
     nixpkgs-fmt
+
+    # DDNS STUFF
+    noip
   ];
 
 }
