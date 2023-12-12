@@ -43,6 +43,7 @@
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "no";
+    settings.GatewayPorts = "yes";
   };
 
   services.resolved = {
