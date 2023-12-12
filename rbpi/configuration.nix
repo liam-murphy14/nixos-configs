@@ -33,12 +33,15 @@
     hostName = "rbpi-nixos"; # Define your hostname.
     networkmanager.enable = true;
     firewall = {
-      enable = false;
-      allowedTCPPorts = [ 22 80 443 ];
+      enable = true;
+      allowedTCPPorts = [ 22 ];
+      allowedUDPPorts = [ 5353 ];
     };
   };
   services.openssh = {
     enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "no";
   };
 
@@ -101,6 +104,7 @@
   # PACKAGES
   environment.systemPackages = with pkgs; [
     neovim
+    noip
   ];
   environment.variables.EDITOR = "nvim";
   environment.pathsToLink = [ "/share/zsh" ];
@@ -108,6 +112,25 @@
 
   system.copySystemConfiguration = false;
 
+  # CUSTOM NOIP SERVICE
 
+  systemd.services.noipDuc = {
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" "auditd.service" "sops-nix.service" ];
+    description = "Start the noip dynamic update client";
+    serviceConfig = {
+      # TODO: make this less bad...
+      # LoadCredential = [
+      #   ''noIpEmail:${config.sops.secrets.noIpEmail.path}''
+      #   ''noIpPassword:${config.sops.secrets.noIpPassword.path}''
+      # ];
+      # ExecStart = ''export NOIPEMAIL=$(cat ${config.sops.secrets.noIpEmail.path}) NOIPPASSWORD=$(cat ${config.sops.secrets.noIpPassword.path}) ${pkgs.noip}/bin/noip2 -u $NOIPEMAIL -p $NOIPPASSWORD -Y'';
+      ExecStart = ''${pkgs.noip}/bin/noip2 -c /home/liam/noip/CONFIG'';
+      Type = "forking";
+      User = "liam";
+      Restart = "on-failure";
+
+    };
+  };
 }
 

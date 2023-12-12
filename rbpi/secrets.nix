@@ -12,6 +12,8 @@
   sops.secrets.hashedPassword = {
     neededForUsers = true;
   };
+  sops.secrets.noIpEmail = {};
+  sops.secrets.noIpPassword = {};
 
 }
 
