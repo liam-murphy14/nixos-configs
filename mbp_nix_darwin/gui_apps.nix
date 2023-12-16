@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{ pkgs, ... }: {
 
   # The packages installed here are available to all users, and are reproducible across machines, and are rollbackable.
   # But on macOS, it's less stable than homebrew.
@@ -40,10 +40,6 @@
     # TODO Feel free to add your favorite apps here.
     brews = [
       "docker"
-      "wget"  # download tool
-      # "curl"  # no not install curl via nixpkgs, it's not working well on macOS!
-      # "aria2"  # download tool
-      # "httpie"  # http client
     ];
 
     # `brew install --cask`
@@ -53,6 +49,7 @@
       "spotify"
       "zoom"
       "whatsapp"
+      "thinkorswim"
       "balenaetcher"
       "visual-studio-code"
       "virtualbox"
