@@ -76,9 +76,9 @@
           ./mbp_nix_darwin/configuration.nix
           home-manager-darwin.darwinModules.home-manager
           {
-            home-manager-darwin.useGlobalPkgs = true;
-            home-manager-darwin.useUserPackages = true;
-            home-manager-darwin.users.liammurphy = import ./mbp_nix_darwin/home.nix;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.liammurphy = import ./mbp_nix_darwin/home.nix;
           }
         ];
       };
