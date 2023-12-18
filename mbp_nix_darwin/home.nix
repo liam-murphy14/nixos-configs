@@ -1,5 +1,15 @@
 { pkgs, ... }:
 
+let
+  my-python-packages = ps: with ps; [
+    ipython
+    matplotlib
+    pandas
+    numpy
+    black
+  ];
+in
+
 {
 
   imports = [
@@ -27,6 +37,12 @@
 
     # NIX
     nil
+
+    # PYTHON 
+    (python3.withPackages my-python-packages)
+
+    # JAVA
+    jdk21
   ];
 
 }

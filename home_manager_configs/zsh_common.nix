@@ -10,8 +10,9 @@
 
     oh-my-zsh = {
       enable = true;
+      custom = toString (./. + "/custom_oh_my_zsh");
       plugins = [ "docker" "vi-mode" "zoxide" "thefuck" "direnv" ];
-      theme = "robbyrussell";
+      theme = "custom-robbyrussell";
     };
 
     shellAliases = {
