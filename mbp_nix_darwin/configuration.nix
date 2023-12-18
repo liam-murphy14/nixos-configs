@@ -57,6 +57,7 @@
   # Create /etc/zshrc that loads the nix-darwin environment.
   # this is required if you want to use darwin's default shell - zsh
   programs.zsh.enable = true;
+  programs.zsh.promptInit = "autoload -U promptinit && promptinit && prompt default && setopt prompt_sp";
   environment.shells = [
     pkgs.zsh
   ];
