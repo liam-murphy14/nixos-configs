@@ -24,6 +24,8 @@ in
 
   home.stateVersion = "23.11";
 
+  home.file.".ipython/profile_default/ipython_config.py".source = ./../home_manager_configs/ipython_config.py;
+
   home.packages = with pkgs; [
     # CORE
     age
