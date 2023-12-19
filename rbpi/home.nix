@@ -15,6 +15,7 @@
 
   home.username = "liam";
   home.homeDirectory = "/home/liam";
+  home.file.".oh_my_zsh/custom/themes/custom-robbyrussell.zsh-theme".source = ./../home_manager_configs/custom-robbyrussell.zsh-theme;
 
   home.stateVersion = "23.11";
 
