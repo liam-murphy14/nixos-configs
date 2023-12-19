@@ -8,6 +8,8 @@ let
     numpy
     black
   ];
+  username = "liammurphy";
+  homeDirectoryPath = "/Users/${username}";
 in
 
 {
@@ -19,12 +21,16 @@ in
     ./../home_manager_configs/zsh_common.nix
   ];
 
-  home.username = "liammurphy";
-  home.homeDirectory = "/Users/liammurphy";
+  zsh_common.homeDirectoryPath = homeDirectoryPath;
+
+
+  home.username = username;
+  home.homeDirectory = homeDirectoryPath;
 
   home.stateVersion = "23.11";
 
   home.file.".ipython/profile_default/ipython_config.py".source = ./../home_manager_configs/ipython_config.py;
+  home.file.".oh_my_zsh/custom/themes/custom-robbyrussell.zsh-theme".source = ./../home_manager_configs/custom-robbyrussell.zsh-theme;
 
   home.packages = with pkgs; [
     # CORE

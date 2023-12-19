@@ -1,39 +1,43 @@
-{ pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
-  programs.zsh = {
+  options.zsh_common.homeDirectoryPath = lib.mkOption { default = "/home/liam"; type = lib.types.str; };
 
-    enable = true;
-    defaultKeymap = "viins";
+  config = {
+    programs.zsh = {
 
-    initExtra = "HYPHEN_INSENSITIVE=\"true\"";
-
-    oh-my-zsh = {
       enable = true;
-      custom = toString (./. + "/custom_oh_my_zsh");
-      plugins = [ "docker" "vi-mode" "zoxide" "thefuck" "direnv" ];
-      theme = "custom-robbyrussell";
-    };
+      defaultKeymap = "viins";
 
-    shellAliases = {
-      cd = "z";
+      initExtra = "HYPHEN_INSENSITIVE=\"true\"";
 
-      cat = "bat";
+      oh-my-zsh = {
+        enable = true;
+        custom = "${config.zsh_common.homeDirectoryPath}/.oh_my_zsh/custom";
+        plugins = [ "docker" "vi-mode" "zoxide" "thefuck" "direnv" ];
+        theme = "custom-robbyrussell";
+      };
 
-      # git aliases
-      ga = "git add";
+      shellAliases = {
+        cd = "z";
 
-      gc = "git commit -m";
+        cat = "bat";
 
-      gp = "git push";
+        # git aliases
+        ga = "git add";
 
-      gb = "git branch";
+        gc = "git commit -m";
 
-      gch = "git checkout --no-guess";
+        gp = "git push";
 
-      avenv = "source $(find . -type d -maxdepth 1 -name \"*venv*\")/bin/activate";
+        gb = "git branch";
 
-      jekser = "bundle exec jekyll serve --livereload --drafts";
+        gch = "git checkout --no-guess";
+
+        avenv = "source $(find . -type d -maxdepth 1 -name \"*venv*\")/bin/activate";
+
+        jekser = "bundle exec jekyll serve --livereload --drafts";
+      };
     };
   };
 }
