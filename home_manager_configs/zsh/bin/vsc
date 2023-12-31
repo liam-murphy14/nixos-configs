@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-workspaces=$(find . -type f -maxdepth 2 -name "*.code-workspace")
+workspaces=$(find . -maxdepth 2 -type f -name "*.code-workspace")
 if [ -n "$workspaces" ]; then
   output=$workspaces 
 else
