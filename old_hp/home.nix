@@ -1,28 +1,31 @@
 { pkgs, ... }:
 
-{
+let
+  username = "liam";
+  homeDirectory = "/home/${username}";
+
+  {
 
   imports = [
     ./../home_manager_configs/chromium.nix
-    ./../home_manager_configs/direnv.nix
     ./../home_manager_configs/git.nix
     ./../home_manager_configs/i3.nix
     ./../home_manager_configs/i3status.nix
     ./../home_manager_configs/kitty.nix
     ./../home_manager_configs/nnn.nix
+    ./../home_manager_configs/python3
     ./../home_manager_configs/rofi.nix
     ./../home_manager_configs/vscode.nix
-    ./../home_manager_configs/zoxide.nix
-    ./../home_manager_configs/zsh_common.nix
-    ./../home_manager_configs/zsh_linux.nix
+    ./../home_manager_configs/zsh
   ];
 
   xsession.enable = true;
 
-  nixpkgs.config.allowUnfreePredicate = (pkg: true);
+  home.username = username;
+  home.homeDirectory = homeDirectory;
 
-  home.username = "liam";
-  home.homeDirectory = "/home/liam";
+  zsh_common.homeDirectoryPath = homeDirectory;
+  zsh_common.includeGuiLinuxAliases = true;
 
   home.stateVersion = "22.05";
 
@@ -51,21 +54,15 @@
     slack
     bat
     gnumake
-    dbeaver
-
-    # NODE
-    yarn
-    nodejs-16_x
 
     # JAVA
-    jdk17_headless
+    jdk21
 
     # RBPI
     rpi-imager
 
     # NIX
     nil
-    nixpkgs-fmt
   ];
 
-}
+  }

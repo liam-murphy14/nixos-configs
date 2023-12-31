@@ -1,9 +1,20 @@
 { lib, config, pkgs, ... }:
 
 {
-  options.zsh_common.homeDirectoryPath = lib.mkOption { default = "/home/liam"; type = lib.types.str; };
+  options.zsh_common = {
+    homeDirectoryPath = lib.mkOption { default = "/home/liam"; type = lib.types.str; };
+    includeGuiLinuxAliases = lib.mkOption { default = false; type = lib.types.bool; };
+  };
 
   config = {
+
+    home.file.".oh_my_zsh/custom/themes/custom-robbyrussell.zsh-theme".source = ./custom-robbyrussell.zsh-theme;
+    home.file."bin".source = ./bin;
+
+    home.sessionPath = [
+      "${config.zsh_common.homeDirectoryPath}/bin"
+    ];
+
     programs.zsh = {
 
       enable = true;
@@ -39,6 +50,11 @@
         avenv = "source $(find . -type d -maxdepth 1 -name \"*venv*\")/bin/activate";
 
         jekser = "bundle exec jekyll serve --livereload --drafts";
+
+      } // lib.optionalAttrs config.zsh_common.includeGuiLinuxAliases {
+        # only for gui linux
+        autox = "xrandr --output HDMI-1 --auto --right-of eDP-1";
+        open = "xdg-open";
       };
     };
   };
