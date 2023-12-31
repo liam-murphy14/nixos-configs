@@ -11,6 +11,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./secrets.nix
+      ./../nix_modules/nix_core.nix
     ];
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
   boot.loader.grub.enable = false;
@@ -54,17 +55,7 @@
   };
 
   # NIX
-  nix = {
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 3d";
-    };
-    extraOptions = ''
-      auto-optimise-store = true
-      experimental-features = nix-command flakes
-    '';
-  };
-  nixpkgs.config.allowUnfreePredicate = (pkg: true);
+  nix_core.allowUnfree = true;
 
   # INTERNATIONALIZATION
   time.timeZone = "America/Vancouver";
@@ -72,15 +63,6 @@
   console = {
     font = "Lat2-Terminus16";
     useXkbConfig = true; # use xkbOptions in tty.
-  };
-
-  # FONTS
-  fonts = {
-    enableDefaultPackages = true;
-    fontDir.enable = true;
-    packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    ];
   };
 
   programs.dconf.enable = true;

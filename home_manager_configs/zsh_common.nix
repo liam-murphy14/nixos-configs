@@ -9,7 +9,7 @@
       enable = true;
       defaultKeymap = "viins";
 
-      initExtra = "HYPHEN_INSENSITIVE=\"true\"";
+      initExtra = "HYPHEN_INSENSITIVE=\"true\""; #TODO: fix this or add option and PR
 
       oh-my-zsh = {
         enable = true;
@@ -23,15 +23,17 @@
 
         cat = "bat";
 
+        l = "ls -lah --color=auto";
+        la = "ls -lAh --color=auto";
+        ll = "ls -lh --color=auto";
+        ls = "ls -G --color=auto";
+        lsa = "ls -lah --color=auto";
+
         # git aliases
         ga = "git add";
-
         gc = "git commit -m";
-
         gp = "git push";
-
         gb = "git branch";
-
         gch = "git checkout --no-guess";
 
         avenv = "source $(find . -type d -maxdepth 1 -name \"*venv*\")/bin/activate";

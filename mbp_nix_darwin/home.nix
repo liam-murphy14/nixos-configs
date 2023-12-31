@@ -17,6 +17,7 @@ in
   imports = [
     ./../home_manager_configs/direnv.nix
     ./../home_manager_configs/git.nix
+    ./../home_manager_configs/neovim.nix
     ./../home_manager_configs/zoxide.nix
     ./../home_manager_configs/zsh_common.nix
   ];

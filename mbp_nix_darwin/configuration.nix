@@ -9,25 +9,16 @@
   imports =
     [
       ./gui_apps.nix
+      ./../nix_modules/nix_core.nix
     ];
   # NETWORK
   networking.hostName = "mbp-nix-darwin";
   networking.computerName = "mbp-nix-darwin";
 
-  # NIX
-  nix = {
-    package = pkgs.nix;
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      auto-optimise-store = false;
-    };
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 3d";
-    };
-  };
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.hostPlatform = "x86_64-darwin";
+  nix_core.allowUnfree = true;
+  nix_core.hostPlatform = "x86_64-darwin";
+  nix_core.autoOptimiseStore = false;
+
   services.nix-daemon.enable = true;
   programs.nix-index.enable = true;
 

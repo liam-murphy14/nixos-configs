@@ -11,6 +11,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./secrets.nix
+      ./../nix_modules/nix_core.nix
     ];
 
   boot = {
@@ -38,18 +39,8 @@
   };
 
   # NIX
-  nix = {
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 3d";
-    };
-    extraOptions = ''
-      auto-optimise-store = true
-      experimental-features = nix-command flakes
-    '';
-  };
-  nixpkgs.config.allowUnfreePredicate = (pkg: true);
-  nixpkgs.config.permittedInsecurePackages = [ "nodejs-16.20.2" ];
+  nix_core.allowUnfree = true;
+  nix_core.permittedInsecurePackages = [ "nodejs-16.20.2" ];
 
   # INTERNATIONALIZATION
   time.timeZone = "America/Vancouver";
