@@ -56,6 +56,7 @@
 
   # NIX
   nix_core.allowUnfree = true;
+  nix_core.hostPlatform = "aarch64-linux";
 
   # INTERNATIONALIZATION
   time.timeZone = "America/Vancouver";
