@@ -9,7 +9,7 @@ in
 
   imports = [
     ./../home_manager_configs/git.nix
-    ./../home_manager_configs/neovim.nix
+    ./../home_manager_configs/neovim
     ./../home_manager_configs/python3
     ./../home_manager_configs/zsh
   ];
