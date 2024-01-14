@@ -22,18 +22,19 @@
         type = "lua";
       }
       {
-        plugin = nvim-lspconfig;
+        plugin = nvim-treesitter.withAllGrammars;
       }
       {
-        plugin = nvim-treesitter.withAllGrammars;
-        # config = ./;
-        # type = "lua";
+        plugin = nvim-lspconfig;
+        # init in completions.lua
       }
       {
         plugin = nvim-cmp;
+        # init in completions.lua
       }
       {
         plugin = luasnip;
+        # init in completions.lua
       }
       {
         plugin = cmp-nvim-lsp;
@@ -42,13 +43,13 @@
       }
       {
         plugin = telescope-nvim;
-        # config = ./;
-        # type = "lua";
+        config = builtins.readFile ./plugins/telescope.lua;
+        type = "lua";
       }
       {
         plugin = nvim-autopairs;
-        # config = ./;
-        # type = "lua";
+        config = builtins.readFile ./plugins/autopairs.lua;
+        type = "lua";
       }
     ];
 
