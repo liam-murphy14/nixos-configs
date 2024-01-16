@@ -23,6 +23,8 @@
       }
       {
         plugin = nvim-treesitter.withAllGrammars;
+        config = builtins.readFile ./plugins/treesitter.lua;
+        type = "lua";
       }
       {
         plugin = nvim-lspconfig;
@@ -54,6 +56,6 @@
     ];
 
     withNodeJs = true;
-    extraPackages = with pkgs; [ nil nodePackages.pyright ];
+    extraPackages = with pkgs; [ nil nodePackages.pyright lua-language-server ];
   };
 }
