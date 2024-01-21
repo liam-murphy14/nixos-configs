@@ -9,11 +9,10 @@
     aggressiveResize = true;
     historyLimit = 5000;
     extraConfig = ''
-      status-style bg="#ABB2BF"
-      status-style fg="#282C34"
-      status-left-length 50
-      set-option -g pane-border-fg "#ABB2BF"
-      set-option -g pane-active-border-fg "#61AFEF"
+      set -g status-style "bg=#ABB2BF","fg=#282C34"
+      set -g status-left-length 50
+      set -g pane-border-style "fg=#ABB2BF"
+      set -g pane-active-border-style "fg=#61AFEF"
     '';
   };
 }
