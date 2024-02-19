@@ -3,8 +3,8 @@
 let
   username = "liam";
   homeDirectory = "/home/${username}";
-
-  {
+in
+{
 
   imports = [
     ./../home_manager_configs/chromium.nix
@@ -64,4 +64,4 @@ let
     rpi-imager
   ];
 
-  }
+}
