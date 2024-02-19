@@ -48,6 +48,7 @@ let
     age
     sops
     xclip
+    file
 
     # DEV GENERAL
     ripgrep
@@ -61,9 +62,6 @@ let
 
     # RBPI
     rpi-imager
-
-    # NIX
-    nil
   ];
 
   }

@@ -40,7 +40,7 @@
 
   # NIX
   nix_core.allowUnfree = true;
-  nix_core.permittedInsecurePackages = [ "nodejs-16.20.2" ];
+  nix_core.hostPlatform = "x86_64-linux";
 
   # INTERNATIONALIZATION
   time.timeZone = "America/Vancouver";
