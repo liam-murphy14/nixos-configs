@@ -5,14 +5,14 @@
     nix_core = {
       allowUnfree = lib.mkOption {
         default = false;
-        type = lib.types.bool; # TODO: check this ?
+        type = lib.types.bool;
       };
       autoOptimiseStore = lib.mkOption {
         default = true;
-        type = lib.types.bool; # TODO: check this ?
+        type = lib.types.bool;
       };
-      hostPlatform = lib.mkOption { type = lib.types.str; }; # TODO: ensure this is optional and defaults to null i think (check if it has a value on nixos platform)
-      permittedInsecurePackages = lib.mkOption { default = [ ]; type = lib.types.list; }; # TODO: ensure this also works and defaults and stuff
+      hostPlatform = lib.mkOption { type = lib.types.nullOr lib.types.str; };
+      permittedInsecurePackages = lib.mkOption { default = [ ]; type = lib.types.listOf lib.types.package; };
     };
   };
   config = {
@@ -29,7 +29,7 @@
     };
 
     nixpkgs.config.allowUnfree = config.nix_core.allowUnfree;
-    nixpkgs.hostPlatform = config.nix_core.hostPlatform; #TODO: check if need assert here
+    nixpkgs.hostPlatform = config.nix_core.hostPlatform; #TODO: check if need assert here with blank
     nixpkgs.config.permittedInsecurePackages = config.nix_core.permittedInsecurePackages;
   };
 }
