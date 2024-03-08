@@ -53,6 +53,11 @@
         config = builtins.readFile ./plugins/autopairs.lua;
         type = "lua";
       }
+      {
+        plugin = comment-nvim;
+        config = builtins.readFile ./plugins/comment-nvim.lua;
+        type = "lua";
+      }
     ];
 
     withNodeJs = true;
