@@ -1,5 +1,7 @@
-{ pkgs, ... }:
+{ ... }:
+
 {
+  imports = [ ./gitall.nix ];
   programs.git = {
     enable = true;
     difftastic = {

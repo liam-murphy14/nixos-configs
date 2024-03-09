@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 
 {
   options.zsh_common = {
@@ -9,11 +9,6 @@
   config = {
 
     home.file.".oh_my_zsh/custom/themes/custom-robbyrussell.zsh-theme".source = ./custom-robbyrussell.zsh-theme;
-    home.file."bin".source = ./bin;
-
-    home.sessionPath = [
-      "${config.zsh_common.homeDirectoryPath}/bin"
-    ];
 
     programs.zsh = {
 
@@ -25,7 +20,7 @@
       oh-my-zsh = {
         enable = true;
         custom = "${config.zsh_common.homeDirectoryPath}/.oh_my_zsh/custom";
-        plugins = [ "docker" "vi-mode" "zoxide" "thefuck" "direnv" ];
+        plugins = [ "vi-mode" "zoxide" "thefuck" "direnv" ];
         theme = "custom-robbyrussell";
       };
 

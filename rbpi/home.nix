@@ -7,7 +7,7 @@ in
 {
 
   imports = [
-    ./../home_manager_configs/git.nix
+    ./../home_manager_configs/git
     ./../home_manager_configs/neovim
     ./../home_manager_configs/nnn.nix
     ./../home_manager_configs/tmux.nix

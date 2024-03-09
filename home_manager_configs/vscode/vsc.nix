@@ -1,5 +1,6 @@
-#!/bin/zsh
+{ pkgs, ... }:
 
+let vscText = ''
 workspaces=$(find . -maxdepth 2 -type f -name "*.code-workspace")
 if [ -n "$workspaces" ]; then
   output=$workspaces 
@@ -8,3 +9,10 @@ else
 fi
 
 code $output
+'';
+ vscScript = pkgs.writeShellScriptBin "vsc" vscText;
+ in
+
+{
+  home.packages = [ vscScript ];
+}

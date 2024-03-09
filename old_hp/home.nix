@@ -8,7 +8,7 @@ in
 
   imports = [
     ./../home_manager_configs/chromium.nix
-    ./../home_manager_configs/git.nix
+    ./../home_manager_configs/git
     ./../home_manager_configs/i3.nix
     ./../home_manager_configs/i3status.nix
     ./../home_manager_configs/kitty.nix
@@ -16,7 +16,7 @@ in
     ./../home_manager_configs/nnn.nix
     ./../home_manager_configs/python3
     ./../home_manager_configs/rofi.nix
-    ./../home_manager_configs/vscode.nix
+    ./../home_manager_configs/vscode
     ./../home_manager_configs/zsh
   ];
 
