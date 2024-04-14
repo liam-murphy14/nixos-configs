@@ -29,6 +29,7 @@
     services.pgbouncer = {
       enable = true;
       databases = config.nix_postgres.pgbouncerDatabases;
+      poolMode = "transaction";
       authType = "scram-sha-256";
       authFile = "/tmp/pgbouncer/userlist.txt"; # TODO: change to be sops generated
       listenAddress = "*";
