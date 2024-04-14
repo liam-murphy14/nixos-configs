@@ -61,6 +61,15 @@
     ];
 
     withNodeJs = true;
-    extraPackages = with pkgs; [ nil nodePackages.pyright lua-language-server ];
+    extraPackages = with pkgs; [
+      nil
+      nodePackages_latest.pyright
+      typescript
+      nodePackages_latest.typescript-language-server
+      lua-language-server
+      nodePackages_latest.svelte-language-server
+      nodePackages_latest."@tailwindcss/language-server"
+      nodePackages_latest."@prisma/language-server"
+    ];
   };
 }
