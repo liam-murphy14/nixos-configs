@@ -63,7 +63,7 @@
     withNodeJs = true;
     extraPackages = with pkgs; [
       nil
-      nodePackages_latest.pyright
+      pyright
       typescript
       nodePackages_latest.typescript-language-server
       lua-language-server
