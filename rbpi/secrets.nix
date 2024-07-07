@@ -15,5 +15,13 @@
   sops.secrets.noIpEmail = { };
   sops.secrets.noIpPassword = { };
 
+  sops.secrets.housefireUserlist = {
+    format = "binary";
+    sopsFile = ./secrets/housefire_userlist.txt;
+    owner = "pgbouncer";
+    path = "/var/lib/pgbouncer/userlist.txt";
+    restartUnits = [ "pgbouncer.service" ];
+  };
+
 }
 
