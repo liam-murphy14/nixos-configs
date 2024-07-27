@@ -12,6 +12,7 @@
       ./hardware-configuration.nix
       ./secrets.nix
       ./../nix_modules/nix_core.nix
+      ./../nix_modules/nix_nixos.nix
       ./../nix_modules/housefire.nix
     ];
 
@@ -59,6 +60,7 @@
   # NIX
   nix_core.allowUnfree = true;
   nix_core.hostPlatform = "aarch64-linux";
+  nix_core.nixpkgsPath = "/etc/nixpkgs/channels/nixpkgs";
 
   # INTERNATIONALIZATION
   time.timeZone = "America/Vancouver";

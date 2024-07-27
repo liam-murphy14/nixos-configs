@@ -10,6 +10,7 @@
     [
       ./gui_apps.nix
       ./../nix_modules/nix_core.nix
+      ./../nix_modules/nix_darwin.nix
     ];
   # NETWORK
   networking.hostName = "mbp-nix-darwin";
@@ -18,6 +19,7 @@
   nix_core.allowUnfree = true;
   nix_core.hostPlatform = "x86_64-darwin";
   nix_core.autoOptimiseStore = false;
+  nix_core.nixpkgsPath = "/etc/nixpkgsChannel";
 
   services.nix-daemon.enable = true;
   programs.nix-index.enable = true;
