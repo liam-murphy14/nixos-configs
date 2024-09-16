@@ -27,6 +27,7 @@
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         pkgs = import nixpkgs { inherit system; };
       });
+
     in
     {
       nixosConfigurations = {
@@ -71,6 +72,17 @@
               home-manager.users.liammurphy = import ./mbp_nix_darwin/home.nix;
             }
           ];
+        };
+      };
+      homeConfigurations = {
+        # for work machines where I dont want to configure the entire OS
+        murplia-mac = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-darwin";
+          modules = [ ./zon_home/mac/home.nix ];
+        };
+        murplia-cloud = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          modules = [ ./zon_home/cloud/home.nix ];
         };
       };
       formatter = forEachSupportedSystem ({ pkgs }: pkgs.nixpkgs-fmt);

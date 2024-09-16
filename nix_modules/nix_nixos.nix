@@ -5,7 +5,7 @@ let
   linuxNixpkgsPath = "${linuxBase}/nixpkgs";
 in
 {
-    systemd.tmpfiles.rules = [
-      "L+ ${linuxNixpkgsPath}     - - - - ${inputNixpkgs}"
-    ];
+  systemd.tmpfiles.rules = [
+    "L+ ${linuxNixpkgsPath}     - - - - ${inputNixpkgs}"
+  ];
 }
