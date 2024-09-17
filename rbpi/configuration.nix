@@ -60,7 +60,7 @@
   # NIX
   nix_core.allowUnfree = true;
   nix_core.hostPlatform = "aarch64-linux";
-  nix_core.nixpkgsPath = "/etc/nixpkgs/channels/nixpkgs";
+  # nix_core.nixpkgsPath = "/etc/nixpkgs/channels/nixpkgs";
 
   # INTERNATIONALIZATION
   time.timeZone = "America/Vancouver";

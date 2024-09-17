@@ -1,9 +1,9 @@
 { lib, pkgs, config, inputs, ... }:
 
 # TODO: find better way to share these
-let
-  inputNixpkgs = inputs.nixpkgs;
-in
+# let
+#   inputNixpkgs = inputs.nixpkgs;
+# in
 {
   options = {
     nix_core = {
@@ -17,10 +17,10 @@ in
       };
       hostPlatform = lib.mkOption { type = lib.types.nullOr lib.types.str; };
       permittedInsecurePackages = lib.mkOption { default = [ ]; type = lib.types.listOf lib.types.package; };
-      nixpkgsPath = lib.mkOption {
-        default = "/etc/nixpkgs/channels/nixpkgs";
-        type = lib.types.str;
-      };
+      # nixpkgsPath = lib.mkOption {
+      #   default = "/etc/nixpkgs/channels/nixpkgs";
+      #   type = lib.types.str;
+      # };
     };
   };
   config = {
@@ -30,16 +30,16 @@ in
         experimental-features = [ "nix-command" "flakes" ];
         auto-optimise-store = config.nix_core.autoOptimiseStore;
       };
-      registry.nixpkgs.flake = inputNixpkgs;
-      nixPath = [
-        "nixpkgs=${config.nix_core.nixpkgsPath}"
-        "darwin-config=/Users/liammurphy/.nixpkgs/darwin-configuration.nix"
-        "/nix/var/nix/profiles/per-user/root/channels"
-      ];
+      # registry.nixpkgs.flake = inputNixpkgs;
+      # nixPath = [
+      #   "nixpkgs=flake:nixpkgs"
+      #   "darwin-config=/Users/liammurphy/.nixpkgs/darwin-configuration.nix"
+      # ];
       gc = {
         automatic = true;
         options = "--delete-older-than 3d";
       };
+      channel.enable = false;
     };
 
     nixpkgs.config.allowUnfree = config.nix_core.allowUnfree;

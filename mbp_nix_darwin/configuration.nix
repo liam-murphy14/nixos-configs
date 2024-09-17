@@ -5,6 +5,8 @@
 { pkgs, config, ... }:
 
 {
+  # THIS IS BECAUSE I AM NOT UPGRADING TO macOS 15 (cuz im broke and have a 2017 model)
+  ids.uids.nixbld = 300;
   # CORE
   imports =
     [
@@ -19,7 +21,7 @@
   nix_core.allowUnfree = true;
   nix_core.hostPlatform = "x86_64-darwin";
   nix_core.autoOptimiseStore = false;
-  nix_core.nixpkgsPath = "/etc/nixpkgsChannel";
+  # nix_core.nixpkgsPath = "/etc/nixpkgsChannel";
 
   services.nix-daemon.enable = true;
   programs.nix-index.enable = true;
