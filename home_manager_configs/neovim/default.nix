@@ -58,6 +58,15 @@
         config = builtins.readFile ./plugins/comment-nvim.lua;
         type = "lua";
       }
+      {
+        plugin = nvim-web-devicons;
+        # init in oil.lua
+      }
+      {
+        plugin = oil-nvim;
+        config = builtins.readFile ./plugins/oil.lua;
+        type = "lua";
+      }
     ];
 
     withNodeJs = true;
