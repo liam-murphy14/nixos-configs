@@ -20,6 +20,8 @@ in
     ./../home_manager_configs/zsh
   ];
 
+  nix_neovim.enableCopilot = true;
+
   xsession.enable = true;
 
   home.username = username;

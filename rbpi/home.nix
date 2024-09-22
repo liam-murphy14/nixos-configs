@@ -14,6 +14,8 @@ in
     ./../home_manager_configs/zsh
   ];
 
+  nix_neovim.enableCopilot = true;
+
   home.username = username;
   home.homeDirectory = homeDirectory;
 
