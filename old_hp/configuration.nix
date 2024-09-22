@@ -25,7 +25,7 @@
     };
   };
 
-  hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.enable = true;
 
   # NETWORK
   networking.hostName = "old-hp-nixos"; # Define your hostname.
