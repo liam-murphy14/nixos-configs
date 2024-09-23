@@ -31,7 +31,10 @@ in
     thefuck
     ripgrep
     bat
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
+
+  fonts.fontconfig.enable = true;
 
   home.file = { };
   home.sessionVariables = { };
