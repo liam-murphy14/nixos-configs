@@ -14,6 +14,7 @@ in
     ./../../home_manager_configs/python3
     ./../../home_manager_configs/zsh
   ];
+  nix_neovim.enableZonBemol = true;
 
   zsh_common.homeDirectoryPath = homeDirectoryPath;
   zsh_common.extraInitExtra = ''

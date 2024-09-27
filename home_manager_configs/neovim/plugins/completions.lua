@@ -4,7 +4,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'nil_ls', 'pyright', 'ts_ls', 'prismals', 'tailwindcss', 'svelte'  }
+local servers = { 'nil_ls', 'pyright', 'ts_ls', 'prismals', 'tailwindcss', 'svelte' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -44,7 +44,8 @@ require'lspconfig'.lua_ls.setup {
   end,
   settings = {
     Lua = {}
-  }
+  },
+  capabilities = capabilities,
 }
 
 -- luasnip setup
@@ -95,6 +96,6 @@ cmp.setup {
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
-    vim.keymap.set('n', 'gd', "<C-]>", { buffer = args.buf })
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = args.buf })
   end,
 })
