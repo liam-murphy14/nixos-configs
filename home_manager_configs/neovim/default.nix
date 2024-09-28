@@ -93,12 +93,19 @@ in
           config = builtins.readFile ./plugins/oil.lua;
           type = "lua";
         }
+        {
+          plugin = neoscroll-nvim;
+          config = builtins.readFile ./plugins/neoscroll.lua;
+          type = "lua";
+        }
       ] ++ lib.lists.optional config.nix_neovim.enableCopilot {
         plugin = copilot-vim;
         # no config needed
       };
 
       withNodeJs = true;
+      withPython3 = true;
+      withRuby = true;
       extraPackages = with pkgs; [
         nil
         pyright
@@ -110,7 +117,7 @@ in
         nodePackages_latest."@prisma/language-server"
         jdt-language-server
         lombok
-      ] ++ lib.lists.optional config.nix_neovim.enableCopilot nodePackages_latest.nodejs;
+      ];
     };
   };
 }
