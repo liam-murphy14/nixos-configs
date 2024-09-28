@@ -31,7 +31,7 @@ in
       vimAlias = true;
       vimdiffAlias = true;
 
-      extraConfig = builtins.readFile ./common.vim;
+      extraLuaConfig = builtins.readFile ./common.lua;
       plugins = with pkgs.vimPlugins; [
         {
           plugin = onedark-nvim;
