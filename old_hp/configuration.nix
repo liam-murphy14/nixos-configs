@@ -12,7 +12,6 @@
       ./hardware-configuration.nix
       ./secrets.nix
       ./../nix_modules/nix_core.nix
-      ./../nix_modules/nix_nixos.nix
     ];
 
   boot = {

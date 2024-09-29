@@ -12,7 +12,6 @@
       ./hardware-configuration.nix
       ./secrets.nix
       ./../nix_modules/nix_core.nix
-      ./../nix_modules/nix_nixos.nix
       ./../nix_modules/housefire.nix
     ];
 
@@ -28,8 +27,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
-  hardware.pulseaudio.enable = true;
 
   # NETWORK
   networking = {
@@ -59,7 +56,6 @@
   # NIX
   nix_core.allowUnfree = true;
   nix_core.hostPlatform = "aarch64-linux";
-  # nix_core.nixpkgsPath = "/etc/nixpkgs/channels/nixpkgs";
 
   # INTERNATIONALIZATION
   time.timeZone = "America/Vancouver";

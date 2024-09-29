@@ -8,8 +8,7 @@ in
 
   imports = [
     ./../home_manager_configs/git
-    ./../home_manager_configs/neovim
-    ./../home_manager_configs/nnn.nix
+    ./../home_manager_configs/neovim/minimum.nix
     ./../home_manager_configs/tmux.nix
     ./../home_manager_configs/zsh
   ];
