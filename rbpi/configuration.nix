@@ -95,6 +95,8 @@
 
   system.copySystemConfiguration = false;
 
+  services.journald.extraConfig = "SystemMaxUse=100M";
+
   # CUSTOM NOIP SERVICE
 
   systemd.services.noipDuc = {
