@@ -24,7 +24,17 @@
     };
   };
 
-  # hardware.pulseaudio.enable = true;
+  # hopefully makes sound work again
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+  };
+
 
   # NETWORK
   networking.hostName = "old-hp-nixos"; # Define your hostname.
@@ -60,10 +70,6 @@
 
   # SERVICES
   services = {
-    xserver = {
-      enable = true;
-      layout = "us";
-
       libinput = {
         enable = true;
         touchpad = {
@@ -73,6 +79,10 @@
           tapping = true;
         };
       };
+    xserver = {
+      enable = true;
+      xkb.layout = "us";
+
       displayManager = {
         lightdm = { enable = true; };
       };

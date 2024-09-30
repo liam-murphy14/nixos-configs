@@ -35,7 +35,7 @@ in
   home.keyboard.options = [ "ctrl:swapcaps" ];
 
   home.pointerCursor = {
-    package = pkgs.gnome.adwaita-icon-theme;
+    package = pkgs.adwaita-icon-theme;
     gtk.enable = true;
     x11.enable = true;
     name = "Adwaita";
