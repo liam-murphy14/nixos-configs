@@ -36,11 +36,12 @@ in
     bat
     gnumake
 
-    # NIX
-    nil
-
     # JAVA
     jdk21
+
+    # rust
+    cargo
+    rustc
   ];
 
 }
