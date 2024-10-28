@@ -38,9 +38,7 @@
 
     # `brew install`
     # TODO Feel free to add your favorite apps here.
-    brews = [
-      "docker"
-    ];
+    brews = [];
 
     # `brew install --cask`
     # TODO Feel free to add your favorite apps here.
@@ -52,7 +50,6 @@
       "thinkorswim"
       "balenaetcher"
       "visual-studio-code"
-      "virtualbox"
       "postman-agent"
       "slack"
       "iterm2"
