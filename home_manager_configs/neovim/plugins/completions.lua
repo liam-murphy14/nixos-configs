@@ -48,6 +48,17 @@ require'lspconfig'.lua_ls.setup {
   capabilities = capabilities,
 }
 
+-- rust-analyzer setup
+require'lspconfig'.rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = true;
+      }
+    }
+  }
+}
+
 -- luasnip setup
 local luasnip = require 'luasnip'
 

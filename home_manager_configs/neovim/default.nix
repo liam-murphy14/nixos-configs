@@ -117,6 +117,7 @@ in
         nodePackages_latest."@prisma/language-server"
         jdt-language-server
         lombok
+        rust-analyzer
       ];
     };
   };
