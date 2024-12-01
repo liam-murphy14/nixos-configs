@@ -32,7 +32,7 @@ in
     thefuck
     ripgrep
     bat
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nerd-fonts.fira-code
   ];
 
   fonts.fontconfig.enable = true;
