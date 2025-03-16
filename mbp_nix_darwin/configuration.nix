@@ -21,7 +21,6 @@
   nix_core.hostPlatform = "x86_64-darwin";
   nix_core.autoOptimiseStore = false;
 
-  services.nix-daemon.enable = true;
   programs.nix-index.enable = true;
 
   # FONTS
