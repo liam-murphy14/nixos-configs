@@ -49,7 +49,7 @@
       "whatsapp"
       "thinkorswim"
       "balenaetcher"
-      "visual-studio-code"
+      "visual-studio-code-insiders"
       "postman-agent"
       "slack"
       "iterm2"

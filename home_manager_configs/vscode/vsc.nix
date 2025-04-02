@@ -9,7 +9,7 @@ let
       output="."
     fi
 
-    code $output
+    code-insiders $output
   '';
   vscScript = pkgs.writeShellScriptBin "vsc" vscText;
 in
