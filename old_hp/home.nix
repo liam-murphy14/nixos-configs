@@ -54,7 +54,6 @@ in
 
     # DEV GENERAL
     ripgrep
-    thefuck
     slack
     bat
     gnumake

@@ -29,7 +29,6 @@ in
 
   home.packages = with pkgs; [
     zoxide
-    thefuck
     ripgrep
     bat
     nerd-fonts.fira-code

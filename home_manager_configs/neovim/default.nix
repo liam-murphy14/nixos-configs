@@ -114,7 +114,6 @@ in
         nodePackages_latest.typescript-language-server
         nodePackages_latest.svelte-language-server
         nodePackages_latest."@tailwindcss/language-server"
-        nodePackages_latest."@prisma/language-server"
         jdt-language-server
         lombok
         rust-analyzer

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 
 {
   # THIS IS BECAUSE I AM NOT UPGRADING TO macOS 15 (cuz im broke and have a 2017 model)
@@ -56,11 +56,13 @@
   system = {
     # configurationRevision = self.rev or self.dirtyRev or null;
     stateVersion = 4;
-    activationScripts.postUserActivation.text = ''
+    primaryUser = "liammurphy";
+    # TODO: figure out how to fix this since postUserActivation is deprecated
+    # activationScripts.postUserActivation.text = ''
       # activateSettings -u will reload the settings from the database and apply them to the current session,
       # so we do not need to logout and login again to make the changes take effect.
-      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-    '';
+    #  /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+    #'';
 
     defaults = {
       smb.NetBIOSName = "mbp-nix-darwin";

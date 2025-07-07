@@ -28,7 +28,7 @@
       oh-my-zsh = {
         enable = true;
         custom = "${config.zsh_common.homeDirectoryPath}/.oh_my_zsh/custom";
-        plugins = [ "vi-mode" "zoxide" "thefuck" "direnv" ];
+        plugins = [ "vi-mode" "zoxide" "direnv" ];
         theme = "custom-robbyrussell";
       };
 

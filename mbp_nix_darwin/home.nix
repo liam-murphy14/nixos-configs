@@ -32,7 +32,6 @@ in
 
     # DEV GENERAL
     ripgrep
-    thefuck
     bat
     gnumake
 
