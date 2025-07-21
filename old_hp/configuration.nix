@@ -70,15 +70,15 @@
 
   # SERVICES
   services = {
-      libinput = {
-        enable = true;
-        touchpad = {
-          accelSpeed = "0.3";
-          naturalScrolling = true;
-          clickMethod = "clickfinger";
-          tapping = true;
-        };
+    libinput = {
+      enable = true;
+      touchpad = {
+        accelSpeed = "0.3";
+        naturalScrolling = true;
+        clickMethod = "clickfinger";
+        tapping = true;
       };
+    };
     xserver = {
       enable = true;
       xkb.layout = "us";

@@ -78,12 +78,53 @@
       homeConfigurations = {
         # for work machines where I dont want to configure the entire OS
         murplia-mac = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-darwin";
-          modules = [ ./zon_home/mac/home.nix ];
+          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+          modules = [
+            ./zon_home/home.nix
+            {
+              zon_home.homeDirectoryPath = "/Users/murplia";
+              zon_home.extraInitExtra = ''
+                eval "$(/opt/homebrew/bin/brew shellenv)"
+                [[ -f "/Users/murplia/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "/Users/murplia/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+              '';
+            }
+          ];
         };
         murplia-cloud = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."aarch64-linux";
+          modules = [
+            ./zon_home/home.nix
+            {
+              zon_home.homeDirectoryPath = "/home/murplia";
+              zon_home.extraInitExtra = ''
+                [[ -f "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh"
+              '';
+            }
+          ];
+        };
+        murplia-86-cloud = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          modules = [ ./zon_home/cloud/home.nix ];
+          modules = [
+            ./zon_home/home.nix
+            {
+              zon_home.homeDirectoryPath = "/home/murplia";
+              zon_home.extraInitExtra = ''
+                [[ -f "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh"
+              '';
+            }
+          ];
+        };
+        murplia-86-cloud-mini = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          modules = [
+            ./zon_home/home.nix
+            {
+              zon_home.homeDirectoryPath = "/home/murplia";
+              zon_home.extraInitExtra = ''
+                [[ -f "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh"
+              '';
+            }
+          ];
         };
       };
       formatter = forEachSupportedSystem ({ pkgs }: pkgs.nixpkgs-fmt);

@@ -38,7 +38,7 @@
 
     # `brew install`
     # TODO Feel free to add your favorite apps here.
-    brews = [];
+    brews = [ ];
 
     # `brew install --cask`
     # TODO Feel free to add your favorite apps here.
