@@ -100,6 +100,7 @@
               zon_home.homeDirectoryPath = "/home/murplia";
               zon_home.extraInitExtra = ''
                 [[ -f "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh"
+                export PATH=$PATH:/home/murplia/.local/share/mise/installs/node/22.16.0/bin
               '';
             }
           ];
