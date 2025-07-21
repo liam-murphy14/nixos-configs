@@ -82,6 +82,7 @@
           modules = [
             ./zon_home/home.nix
             {
+              imports = [ ./home_manager_configs/neovim ];
               zon_home.homeDirectoryPath = "/Users/murplia";
               zon_home.extraInitExtra = ''
                 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -95,6 +96,7 @@
           modules = [
             ./zon_home/home.nix
             {
+              imports = [ ./home_manager_configs/neovim ];
               zon_home.homeDirectoryPath = "/home/murplia";
               zon_home.extraInitExtra = ''
                 [[ -f "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh"
@@ -107,6 +109,7 @@
           modules = [
             ./zon_home/home.nix
             {
+              imports = [ ./home_manager_configs/neovim ];
               zon_home.homeDirectoryPath = "/home/murplia";
               zon_home.extraInitExtra = ''
                 [[ -f "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh"
@@ -119,6 +122,7 @@
           modules = [
             ./zon_home/home.nix
             {
+              imports = [ ./home_manager_configs/neovim/minimum_zon.nix ];
               zon_home.homeDirectoryPath = "/home/murplia";
               zon_home.extraInitExtra = ''
                 [[ -f "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "/home/murplia/.local/share/amazon-q/shell/zshrc.post.zsh"
