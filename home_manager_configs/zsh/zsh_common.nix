@@ -4,6 +4,7 @@
   options.zsh_common = {
     homeDirectoryPath = lib.mkOption { default = "/home/liam"; type = lib.types.str; };
     includeGuiLinuxAliases = lib.mkOption { default = false; type = lib.types.bool; };
+    extraPreInit = lib.mkOption { default = ""; type = lib.types.str; };
     extraInitExtra = lib.mkOption { default = ""; type = lib.types.str; };
     extraShellAliases = lib.mkOption { default = { }; type = lib.types.attrsOf lib.types.str; };
   };
@@ -18,7 +19,7 @@
       defaultKeymap = "viins";
 
       # TODO: fix HYPHEN_INSENSITIVE option or add option and PR
-      initExtra = ''
+      initContent = config.zsh_common.extraPreInit + ''
         HYPHEN_INSENSITIVE="true"
         if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
           . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
@@ -46,6 +47,7 @@
         # git aliases
         ga = "git add";
         gc = "git commit -m";
+        gca = "git commit --amend";
         gp = "git push";
         gb = "git branch";
         gch = "git checkout --no-guess";

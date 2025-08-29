@@ -9,6 +9,7 @@
   options.zon_home = {
     homeDirectoryPath = lib.mkOption { default = "/home/murplia"; type = lib.types.str; };
     extraInitExtra = lib.mkOption { default = ""; type = lib.types.str; };
+    extraPreInit = lib.mkOption { default = ""; type = lib.types.str; };
   };
 
   config = {
@@ -19,6 +20,7 @@
     nix_neovim.enableZonBemol = true;
 
     zsh_common.homeDirectoryPath = config.zon_home.homeDirectoryPath;
+    zsh_common.extraPreInit = config.zon_home.extraPreInit;
     zsh_common.extraInitExtra = ''
       export PATH=$PATH:$HOME/.toolbox/bin
       # Set up mise for runtime management

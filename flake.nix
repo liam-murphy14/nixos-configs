@@ -84,8 +84,10 @@
             {
               imports = [ ./home_manager_configs/neovim ];
               zon_home.homeDirectoryPath = "/Users/murplia";
-              zon_home.extraInitExtra = ''
+              zon_home.extraPreInit = ''
                 eval "$(/opt/homebrew/bin/brew shellenv)"
+              '';
+              zon_home.extraInitExtra = ''
                 [[ -f "/Users/murplia/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "/Users/murplia/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
               '';
             }
