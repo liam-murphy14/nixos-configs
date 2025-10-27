@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ ... }:
+{ config, ... }:
 
 {
 
@@ -12,8 +12,16 @@
   sops.secrets.hashedPassword = {
     neededForUsers = true;
   };
-  sops.secrets.noIpEmail = { };
-  sops.secrets.noIpPassword = { };
+  sops.secrets.noIpEmail = {
+    owner = config.users.users.liam.name;
+    group = config.users.users.liam.group;
+    restartUnits = [ "noipDuc.service" ];
+  };
+  sops.secrets.noIpPassword = {
+    owner = config.users.users.liam.name;
+    group = config.users.users.liam.group;
+    restartUnits = [ "noipDuc.service" ];
+  };
 
   sops.secrets.housefireUserlist = {
     format = "binary";

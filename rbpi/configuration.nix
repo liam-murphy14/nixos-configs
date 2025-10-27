@@ -104,15 +104,15 @@
     after = [ "network.target" "auditd.service" "sops-nix.service" ];
     description = "Start the noip dynamic update client";
     serviceConfig = {
-      # TODO: make this less bad...
-      # LoadCredential = [
-      #   ''noIpEmail:${config.sops.secrets.noIpEmail.path}''
-      #   ''noIpPassword:${config.sops.secrets.noIpPassword.path}''
-      # ];
-      # ExecStart = ''export NOIPEMAIL=$(cat ${config.sops.secrets.noIpEmail.path}) NOIPPASSWORD=$(cat ${config.sops.secrets.noIpPassword.path}) ${pkgs.noip}/bin/noip2 -u $NOIPEMAIL -p $NOIPPASSWORD -Y'';
-      ExecStart = ''${pkgs.noip}/bin/noip2 -c /home/liam/noip/CONFIG'';
-      Type = "forking";
-      User = "liam";
+      ExecStart = pkgs.writeShellScript "noip-duc-entrypoint" ''
+        ${pkgs.noip}/bin/noip-duc \
+        -u "$(cat ${config.sops.secrets.noIpEmail.path})" \
+        -p "$(cat ${config.sops.secrets.noIpPassword.path})"  \
+        -g "liamrbpi.hopto.org"
+      '';
+      Type = "simple";
+      User = config.users.users.liam.name;
+      Group = config.users.users.liam.group;
       Restart = "on-failure";
 
     };
