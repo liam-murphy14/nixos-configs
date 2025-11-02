@@ -20,9 +20,14 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    python-serverless-housefire = {
+      url = "github:liam-murphy14/python_serverless_housefire";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, sops-nix, nix-darwin }@inputs:
+  outputs = { self, nixpkgs, home-manager, sops-nix, nix-darwin, python-serverless-housefire }@inputs:
     let
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
@@ -58,6 +63,7 @@
               home-manager.users.liam = import ./rbpi/home.nix;
             }
             sops-nix.nixosModules.sops
+            ./nix_modules/housefire.nix
           ];
         };
       };
@@ -78,7 +84,6 @@
       homeConfigurations = {
         # for work machines where I dont want to configure the entire OS
         murplia-mac = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
           modules = [
             ./zon_home/home.nix
             {
@@ -94,7 +99,6 @@
           ];
         };
         murplia-cloud = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."aarch64-linux";
           modules = [
             ./zon_home/home.nix
             {
@@ -108,7 +112,6 @@
           ];
         };
         murplia-86-cloud = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [
             ./zon_home/home.nix
             {
@@ -121,7 +124,6 @@
           ];
         };
         murplia-86-cloud-mini = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [
             ./zon_home/home.nix
             {

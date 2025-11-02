@@ -12,7 +12,6 @@
       ./hardware-configuration.nix
       ./secrets.nix
       ./../nix_modules/nix_core.nix
-      ./../nix_modules/housefire.nix
     ];
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
@@ -110,7 +109,7 @@
         -p "$(cat ${config.sops.secrets.noIpPassword.path})"  \
         -g "liamrbpi.hopto.org"
       '';
-      Type = "simple";
+      Type = "exec";
       User = config.users.users.liam.name;
       Group = config.users.users.liam.group;
       Restart = "on-failure";

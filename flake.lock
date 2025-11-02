@@ -56,11 +56,32 @@
         "type": "github"
       }
     },
+    "python-serverless-housefire": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1761533655,
+        "narHash": "sha256-hnFXqHbEeO7M5uuQQWOgYtROf9mb1IBBYvPjbBh/dks=",
+        "owner": "liam-murphy14",
+        "repo": "python_serverless_housefire",
+        "rev": "7526fc3a14208d9a5b3399ed4f50385c90acbaa1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "liam-murphy14",
+        "repo": "python_serverless_housefire",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
+        "python-serverless-housefire": "python-serverless-housefire",
         "sops-nix": "sops-nix"
       }
     },
