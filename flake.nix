@@ -84,7 +84,7 @@
       homeConfigurations = {
         # for work machines where I dont want to configure the entire OS
         murplia-mac = home-manager.lib.homeManagerConfiguration {
-                  pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
           modules = [
             ./zon_home/home.nix
             {
@@ -100,7 +100,7 @@
           ];
         };
         murplia-cloud = home-manager.lib.homeManagerConfiguration {
-                  pkgs = nixpkgs.legacyPackages."aarch64-linux";
+          pkgs = nixpkgs.legacyPackages."aarch64-linux";
           modules = [
             ./zon_home/home.nix
             {
@@ -114,7 +114,7 @@
           ];
         };
         murplia-86-cloud = home-manager.lib.homeManagerConfiguration {
-                  pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [
             ./zon_home/home.nix
             {
@@ -127,7 +127,7 @@
           ];
         };
         murplia-86-cloud-mini = home-manager.lib.homeManagerConfiguration {
-                  pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [
             ./zon_home/home.nix
             {

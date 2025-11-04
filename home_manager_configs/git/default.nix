@@ -4,11 +4,20 @@
   imports = [ ./gitall.nix ];
   programs.git = {
     enable = true;
-    difftastic = {
+    settings = {
+      user = {
+        email = "liam.murphy137@gmail.com";
+        name = "liam-murphy14";
+      };
+    };
+  };
+  programs.difftastic = {
+    enable = true;
+    git = {
       enable = true;
+    };
+    options = {
       background = "dark";
     };
-    userEmail = "liam.murphy137@gmail.com";
-    userName = "liam-murphy14";
   };
 }

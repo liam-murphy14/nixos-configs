@@ -1,7 +1,7 @@
 { pkgs, inputs, config, ... }:
 
 let
-  housefirePackage = inputs.python-serverless-housefire.packages.${pkgs.system}.default;
+  housefirePackage = inputs.python-serverless-housefire.packages.${pkgs.stdenv.hostPlatform.system}.default;
   housefireServiceFactory = { ticker }: {
     after = [ "network.target" "auditd.service" ];
     description = "The python housefire scraper client for ${ticker}";

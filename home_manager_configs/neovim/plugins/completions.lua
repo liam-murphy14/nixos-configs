@@ -1,19 +1,19 @@
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local lspconfig = require('lspconfig')
-
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'nil_ls', 'pyright', 'ts_ls', 'tailwindcss', 'svelte' }
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+    vim.lsp.config(lsp, {
     -- on_attach = my_custom_on_attach,
     capabilities = capabilities,
-  }
+  })
+  vim.lsp.enable(lsp)
 end
 
 -- lua_ls setup for Neovim specfically
-require'lspconfig'.lua_ls.setup {
+vim.lsp.config('lua_ls',
+{
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
@@ -47,9 +47,11 @@ require'lspconfig'.lua_ls.setup {
   },
   capabilities = capabilities,
 }
+)
+vim.lsp.enable('lua_ls')
 
 -- rust-analyzer setup
-require'lspconfig'.rust_analyzer.setup{
+vim.lsp.config('rust_analyzer', {
   settings = {
     ['rust-analyzer'] = {
       diagnostics = {
@@ -57,7 +59,8 @@ require'lspconfig'.rust_analyzer.setup{
       }
     }
   }
-}
+})
+vim.lsp.enable('rust_analyzer')
 
 -- luasnip setup
 local luasnip = require 'luasnip'
