@@ -62,6 +62,7 @@
       "boop"
       "flycut"
       "vlc"
+      "discord"
     ];
   };
 }

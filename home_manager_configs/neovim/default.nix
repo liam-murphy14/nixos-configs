@@ -98,10 +98,11 @@ in
           config = builtins.readFile ./plugins/neoscroll.lua;
           type = "lua";
         }
-      ] ++ lib.lists.optional config.nix_neovim.enableCopilot {
-        plugin = copilot-vim;
-        # no config needed
-      };
+      ]; # ++ lib.lists.optional config.nix_neovim.enableCopilot {
+      # no more subscription
+      # plugin = copilot-vim;
+      # no config needed
+      # kk};
 
       withNodeJs = true;
       withPython3 = true;
