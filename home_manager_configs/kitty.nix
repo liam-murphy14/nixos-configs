@@ -6,7 +6,7 @@
     enable = true;
 
     font = {
-      package = with pkgs; (nerdfonts.override { fonts = [ "FiraCode" ]; });
+      package = pkgs.nerd-fonts.fira-code;
       name = "FiraCode Nerd Font";
       size = 14.0;
     };
