@@ -11,7 +11,7 @@
       size = 14.0;
     };
 
-    theme = "One Half Dark";
+    themeFile = "OneHalfDark";
 
     keybindings = {
       "ctrl+shift+1" = "goto_tab 1";
