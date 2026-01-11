@@ -51,6 +51,7 @@ in
     sops
     xclip
     file
+    gparted
 
     # DEV GENERAL
     ripgrep
