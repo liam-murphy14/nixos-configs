@@ -8,6 +8,7 @@ in
 
   imports = [
     ./../home_manager_configs/chromium.nix
+    ./../home_manager_configs/gammastep.nix
     ./../home_manager_configs/git
     ./../home_manager_configs/i3.nix
     ./../home_manager_configs/i3status.nix

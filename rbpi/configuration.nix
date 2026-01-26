@@ -6,13 +6,12 @@
 
 {
   # CORE
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./secrets.nix
-      ./../nix_modules/nix_core.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./secrets.nix
+    ./../nix_modules/nix_core.nix
+  ];
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
   boot.loader.grub.enable = false;
@@ -33,8 +32,18 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 80 443 5432 6432 8245 ];
-      allowedUDPPorts = [ 5353 8245 ];
+      allowedTCPPorts = [
+        22
+        80
+        443
+        5432
+        6432
+        8245
+      ];
+      allowedUDPPorts = [
+        5353
+        8245
+      ];
     };
   };
   services.openssh = {
@@ -74,7 +83,11 @@
   users.users.liam = {
     isNormalUser = true;
     hashedPasswordFile = config.sops.secrets.hashedPassword.path;
-    extraGroups = [ "wheel" "docker" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+      "networkmanager"
+    ];
     shell = pkgs.zsh;
 
     openssh.authorizedKeys.keys = [
@@ -91,7 +104,6 @@
   environment.variables.EDITOR = "nvim";
   environment.pathsToLink = [ "/share/zsh" ];
 
-
   system.copySystemConfiguration = false;
 
   services.journald.extraConfig = "SystemMaxUse=100M";
@@ -100,7 +112,11 @@
 
   systemd.services.noipDuc = {
     wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" "auditd.service" "sops-nix.service" ];
+    after = [
+      "network.target"
+      "auditd.service"
+      "sops-nix.service"
+    ];
     description = "Start the noip dynamic update client";
     serviceConfig = {
       ExecStart = pkgs.writeShellScript "noip-duc-entrypoint" ''
@@ -117,4 +133,3 @@
     };
   };
 }
-

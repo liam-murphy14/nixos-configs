@@ -14,14 +14,16 @@
 
       window.border = 2;
 
-      bars = [{
-        position = "top";
-        fonts = {
-          names = [ "FiraCode Nerd Font" ];
-          size = 10.0;
-        };
-        statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
-      }];
+      bars = [
+        {
+          position = "top";
+          fonts = {
+            names = [ "FiraCode Nerd Font" ];
+            size = 10.0;
+          };
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
+        }
+      ];
 
       keybindings = lib.mkOptionDefault {
         "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
@@ -68,6 +70,5 @@
       	exec i3-msg workspace 1
       	'';
   };
-
 
 }

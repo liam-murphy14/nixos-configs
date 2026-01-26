@@ -24,7 +24,6 @@ in
 
   home.stateVersion = "23.11";
 
-
   home.packages = with pkgs; [
     # CORE
     age

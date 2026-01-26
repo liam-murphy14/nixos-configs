@@ -2,17 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 {
   # CORE
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./secrets.nix
-      ./../nix_modules/nix_core.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./secrets.nix
+    ./../nix_modules/nix_core.nix
+  ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -34,7 +38,6 @@
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
-
 
   # NETWORK
   networking.hostName = "old-hp-nixos"; # Define your hostname.
@@ -84,7 +87,9 @@
       xkb.layout = "us";
 
       displayManager = {
-        lightdm = { enable = true; };
+        lightdm = {
+          enable = true;
+        };
       };
       desktopManager.session = [
         {
@@ -104,11 +109,13 @@
     dedicatedServer.openFirewall = true;
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "steam"
-    "steam-original"
-    "steam-run"
-  ];
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-original"
+      "steam-run"
+    ];
 
   virtualisation.docker.enable = true;
   programs.dconf.enable = true;
@@ -121,7 +128,11 @@
   users.users.liam = {
     isNormalUser = true;
     hashedPasswordFile = config.sops.secrets.hashedPassword.path;
-    extraGroups = [ "wheel" "docker" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+      "networkmanager"
+    ];
     shell = pkgs.zsh;
   };
 
@@ -131,7 +142,6 @@
   ];
   environment.variables.EDITOR = "nvim";
   environment.pathsToLink = [ "/share/zsh" ];
-
 
   system.copySystemConfiguration = false;
 
@@ -144,4 +154,3 @@
   system.stateVersion = "22.11"; # Did you read the comment?
 
 }
-

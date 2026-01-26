@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
   imports = [
@@ -7,9 +12,18 @@
     ./../home_manager_configs/zsh
   ];
   options.zon_home = {
-    homeDirectoryPath = lib.mkOption { default = "/home/murplia"; type = lib.types.str; };
-    extraInitExtra = lib.mkOption { default = ""; type = lib.types.str; };
-    extraPreInit = lib.mkOption { default = ""; type = lib.types.str; };
+    homeDirectoryPath = lib.mkOption {
+      default = "/home/murplia";
+      type = lib.types.str;
+    };
+    extraInitExtra = lib.mkOption {
+      default = "";
+      type = lib.types.str;
+    };
+    extraPreInit = lib.mkOption {
+      default = "";
+      type = lib.types.str;
+    };
   };
 
   config = {
@@ -28,7 +42,8 @@
       if [ -e ${config.zon_home.homeDirectoryPath}/.brazil_completion/zsh_completion ]; then source ${config.zon_home.homeDirectoryPath}/.brazil_completion/zsh_completion; fi
       if [ -e ${config.zon_home.homeDirectoryPath}/.nix-profile/etc/profile.d/nix.sh ]; then . ${config.zon_home.homeDirectoryPath}/.nix-profile/etc/profile.d/nix.sh; fi
       export PATH=$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH
-    '' + config.zon_home.extraInitExtra;
+    ''
+    + config.zon_home.extraInitExtra;
     zsh_common.extraShellAliases = {
       bb = "brazil-build";
       brc = "brazil-recursive-cmd";

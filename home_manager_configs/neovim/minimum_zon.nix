@@ -5,9 +5,22 @@ let
 
   rootMarkersBlockBemolZon = "{ '.bemol' }";
   bemolOnAttachBlockBemolZon = "on_attach = bemol,";
-  jdtlsSetupFinalBemolZon = builtins.replaceStrings [ "JDTLS_PATH_BLOCK" "LOMBOK_PATH_BLOCK" "''--ROOT_MARKERS_BLOCK" "--BEMOL_ON_ATTACH_BLOCK" ] [ "${pkgs.jdt-language-server}" "${pkgs.lombok}" rootMarkersBlockBemolZon bemolOnAttachBlockBemolZon ] jdtlsSetupRaw;
+  jdtlsSetupFinalBemolZon =
+    builtins.replaceStrings
+      [ "JDTLS_PATH_BLOCK" "LOMBOK_PATH_BLOCK" "''--ROOT_MARKERS_BLOCK" "--BEMOL_ON_ATTACH_BLOCK" ]
+      [
+        "${pkgs.jdt-language-server}"
+        "${pkgs.lombok}"
+        rootMarkersBlockBemolZon
+        bemolOnAttachBlockBemolZon
+      ]
+      jdtlsSetupRaw;
 
-  pathToJdtlsConfig = if pkgs.stdenv.isDarwin then pkgs.jdt-language-server + /share/java/jdtls/config_mac/config.ini else pkgs.jdt-language-server + /share/java/jdtls/config_linux/config.ini;
+  pathToJdtlsConfig =
+    if pkgs.stdenv.isDarwin then
+      pkgs.jdt-language-server + /share/java/jdtls/config_mac/config.ini
+    else
+      pkgs.jdt-language-server + /share/java/jdtls/config_linux/config.ini;
 in
 
 {

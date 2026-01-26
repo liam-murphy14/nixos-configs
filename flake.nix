@@ -27,12 +27,30 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, sops-nix, nix-darwin, python-serverless-housefire }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      sops-nix,
+      nix-darwin,
+      python-serverless-housefire,
+    }@inputs:
     let
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
-        pkgs = import nixpkgs { inherit system; };
-      });
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+      forEachSupportedSystem =
+        f:
+        nixpkgs.lib.genAttrs supportedSystems (
+          system:
+          f {
+            pkgs = import nixpkgs { inherit system; };
+          }
+        );
 
     in
     {
@@ -140,6 +158,6 @@
           ];
         };
       };
-      formatter = forEachSupportedSystem ({ pkgs }: pkgs.nixpkgs-fmt);
+      formatter = forEachSupportedSystem ({ pkgs }: pkgs.nixfmt-tree);
     };
 }

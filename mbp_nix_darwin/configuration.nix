@@ -8,11 +8,10 @@
   # THIS IS BECAUSE I AM NOT UPGRADING TO macOS 15 (cuz im broke and have a 2017 model)
   ids.uids.nixbld = 300;
   # CORE
-  imports =
-    [
-      ./gui_apps.nix
-      ./../nix_modules/nix_core.nix
-    ];
+  imports = [
+    ./gui_apps.nix
+    ./../nix_modules/nix_core.nix
+  ];
   # NETWORK
   networking.hostName = "mbp-nix-darwin";
   networking.computerName = "mbp-nix-darwin";
@@ -98,7 +97,7 @@
         # This is very useful for vim users, they use `hjkl` to move cursor.
         # sets how long it takes before it starts repeating.
         InitialKeyRepeat = 15; # normal minimum is 15 (225 ms), maximum is 120 (1800 ms)
-        # sets how fast it repeats once it starts. 
+        # sets how fast it repeats once it starts.
         KeyRepeat = 2; # normal minimum is 2 (30 ms), maximum is 120 (1800 ms)
 
         NSAutomaticCapitalizationEnabled = false; # disable auto capitalization(自动大写)
@@ -113,7 +112,7 @@
       # Customize settings that not supported by nix-darwin directly
       # see the source code of this project to get more undocumented options:
       #    https://github.com/rgcr/m-cli
-      # 
+      #
       # All custom entries can be found by running `defaults read` command.
       # or `defaults read xxx` to read a specific domain.
       CustomUserPreferences = {
@@ -172,13 +171,12 @@
     # remapCapsLockToControl = false;  # remap caps lock to control, useful for emac users
     # remapCapsLockToEscape  = true;   # remap caps lock to escape, useful for vim users
 
-    # swap left command and left alt 
+    # swap left command and left alt
     # so it matches common keyboard layout: `ctrl | command | alt`
     #
     # disabled, caused only problems!
-    # swapLeftCommandAndLeftAlt = false;  
+    # swapLeftCommandAndLeftAlt = false;
     # };
   };
 
 }
-
