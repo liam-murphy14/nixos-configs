@@ -86,6 +86,9 @@
       enable = true;
       xkb.layout = "us";
 
+      autoRepeatDelay = 225;
+      autoRepeatInterval = 30;
+
       displayManager = {
         lightdm = {
           enable = true;
