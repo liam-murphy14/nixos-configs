@@ -10,6 +10,7 @@ for _, lsp in ipairs(servers) do
   })
   vim.lsp.enable(lsp)
 end
+vim.diagnostic.config({virtual_text = true})
 
 -- lua_ls setup for Neovim specfically
 vim.lsp.config('lua_ls',
@@ -98,6 +99,6 @@ cmp.setup {
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = args.buf })
+    vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
   end,
 })

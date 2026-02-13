@@ -137,6 +137,7 @@ in
       withPython3 = true;
       withRuby = true;
       extraPackages = with pkgs; [
+        ripgrep
         nil
         pyright
         typescript

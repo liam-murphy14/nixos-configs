@@ -3,3 +3,13 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fr', builtin.registers, {})
+vim.keymap.set('n', '<leader>F', builtin.current_buffer_fuzzy_find, {})
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    vim.keymap.set('n', 'gd', builtin.lsp_definitions, { buffer = args.buf})
+    vim.keymap.set('n', 'gr', builtin.lsp_references, { buffer = args.buf})
+    vim.keymap.set('n', 'gi', builtin.lsp_implementations, { buffer = args.buf})
+    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { buffer = args.buf})
+  end,
+})
