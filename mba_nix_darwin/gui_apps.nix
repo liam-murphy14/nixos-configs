@@ -52,7 +52,6 @@
       "postico"
       "ledger-live"
       "boop"
-      "flycut"
       "vlc"
       "discord"
     ];
