@@ -44,6 +44,7 @@
       "visual-studio-code"
       "postman-agent"
       "slack"
+      "flycut"
       "iterm2"
       "itermai"
       "rectangle"
