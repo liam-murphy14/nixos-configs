@@ -91,7 +91,6 @@
     shell = pkgs.zsh;
 
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkCexrVowwSF16fESmeH+7da4dQR5Xg6EO4O4iE6Zqo liam@liam-nixos"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIATnP26pVMSd2oZ3bKZ0gmtxM9PB7J4UhGZgFvTrvgRR liammurphy@Liams-MacBook-Air.local"
     ];
   };
