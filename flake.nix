@@ -107,9 +107,6 @@
             {
               imports = [ ./home_manager_configs/neovim ];
               zon_home.homeDirectoryPath = "/home/murplia";
-              zon_home.extraInitExtra = ''
-                export PATH=$PATH:/home/murplia/.local/share/mise/installs/node/22.16.0/bin
-              '';
             }
           ];
         };
@@ -120,9 +117,6 @@
             {
               imports = [ ./home_manager_configs/neovim ];
               zon_home.homeDirectoryPath = "/home/murplia";
-              zon_home.extraInitExtra = ''
-                export PATH=$PATH:/home/murplia/.local/share/mise/installs/node/22.16.0/bin
-              '';
             }
           ];
         };
