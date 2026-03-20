@@ -51,10 +51,11 @@
       "figma"
       "karabiner-elements"
       "postico"
-      "ledger-live"
+      "ledger-wallet"
       "boop"
       "vlc"
       "discord"
+      "rustrover"
     ];
   };
 }
