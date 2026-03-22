@@ -34,15 +34,8 @@
       enable = true;
       allowedTCPPorts = [
         22
-        80
-        443
         5432
         6432
-        8245
-      ];
-      allowedUDPPorts = [
-        5353
-        8245
       ];
     };
   };
@@ -57,6 +50,7 @@
   services.resolved = {
     enable = true;
     fallbackDns = [
+      "1.1.1.1"
       "8.8.8.8"
     ];
   };
@@ -98,7 +92,6 @@
   # PACKAGES
   environment.systemPackages = with pkgs; [
     neovim
-    noip
   ];
   environment.variables.EDITOR = "nvim";
   environment.pathsToLink = [ "/share/zsh" ];
@@ -106,29 +99,4 @@
   system.copySystemConfiguration = false;
 
   services.journald.extraConfig = "SystemMaxUse=100M";
-
-  # CUSTOM NOIP SERVICE
-
-  systemd.services.noipDuc = {
-    wantedBy = [ "multi-user.target" ];
-    after = [
-      "network.target"
-      "auditd.service"
-      "sops-nix.service"
-    ];
-    description = "Start the noip dynamic update client";
-    serviceConfig = {
-      ExecStart = pkgs.writeShellScript "noip-duc-entrypoint" ''
-        ${pkgs.noip}/bin/noip-duc \
-        -u "$(cat ${config.sops.secrets.noIpEmail.path})" \
-        -p "$(cat ${config.sops.secrets.noIpPassword.path})"  \
-        -g "liamrbpi.hopto.org"
-      '';
-      Type = "exec";
-      User = config.users.users.liam.name;
-      Group = config.users.users.liam.group;
-      Restart = "on-failure";
-
-    };
-  };
 }
