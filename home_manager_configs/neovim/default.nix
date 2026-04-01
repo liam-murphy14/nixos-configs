@@ -36,10 +36,6 @@ in
 
 {
   options.nix_neovim = {
-    enableCopilot = lib.mkOption {
-      default = false;
-      type = lib.types.bool;
-    };
     enableZonBemol = lib.mkOption {
       default = false;
       type = lib.types.bool;
@@ -127,11 +123,12 @@ in
           config = builtins.readFile ./plugins/neoscroll.lua;
           type = "lua";
         }
-      ]; # ++ lib.lists.optional config.nix_neovim.enableCopilot {
-      # no more subscription
-      # plugin = copilot-vim;
-      # no config needed
-      # kk};
+        {
+          plugin = gitsigns-nvim;
+          config = builtins.readFile ./plugins/gitsigns.lua;
+          type = "lua";
+        }
+      ];
 
       withNodeJs = true;
       withPython3 = true;
