@@ -31,6 +31,7 @@ in
     ripgrep
     bat
     gnumake
+    codex
 
     # rust
     cargo
