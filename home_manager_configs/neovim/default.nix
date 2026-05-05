@@ -56,7 +56,7 @@ in
       vimAlias = true;
       vimdiffAlias = true;
 
-      extraLuaConfig = builtins.readFile ./common.lua;
+      initLua = builtins.readFile ./common.lua;
       plugins = with pkgs.vimPlugins; [
         {
           plugin = onedark-nvim;
@@ -139,9 +139,9 @@ in
         pyright
         typescript
         lua-language-server
-        nodePackages_latest.typescript-language-server
-        nodePackages_latest.svelte-language-server
-        nodePackages_latest."@tailwindcss/language-server"
+        typescript-language-server
+        svelte-language-server
+        tailwindcss-language-server
         jdt-language-server
         lombok
         rust-analyzer

@@ -1,7 +1,5 @@
 {
   pkgs,
-  lib,
-  config,
   ...
 }:
 
@@ -15,7 +13,7 @@
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraLuaConfig = builtins.readFile ./common.lua;
+    initLua = builtins.readFile ./common.lua;
     plugins = with pkgs.vimPlugins; [
       {
         plugin = onedark-nvim;

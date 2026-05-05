@@ -50,7 +50,7 @@
       bat
       nerd-fonts.fira-code
       zstd
-      nodePackages_latest.nodejs
+      nodejs_latest
     ];
 
     fonts.fontconfig.enable = true;
