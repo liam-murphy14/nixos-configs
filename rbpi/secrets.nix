@@ -21,4 +21,11 @@
     restartUnits = [ "pgbouncer.service" ];
   };
 
+  sops.secrets.rustyDdnsCloudflareToken = {
+    format = "binary";
+    sopsFile = ./secrets/rusty_ddns_cloudflare_token.txt;
+    owner = "rusty-ddns";
+    restartUnits = [ "rusty-ddns.service" ];
+  };
+
 }

@@ -25,6 +25,11 @@
       url = "github:liam-murphy14/python_serverless_housefire";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    rusty-ddns = {
+      url = "github:liam-murphy14/rusty_ddns";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -35,6 +40,7 @@
       sops-nix,
       nix-darwin,
       python-serverless-housefire,
+      rusty-ddns,
     }@inputs:
     let
       supportedSystems = [
@@ -68,6 +74,10 @@
             }
             sops-nix.nixosModules.sops
             ./nix_modules/housefire.nix
+            ./nix_modules/ddns.nix
+            {
+              ddns.recordName = "rbpi.liammurphydev.com";
+            }
           ];
         };
       };
