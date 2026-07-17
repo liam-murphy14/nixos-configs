@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
 
   # The packages installed here are available to all users, and are reproducible across machines, and are rollbackable.
@@ -11,7 +11,8 @@
     enable = true;
 
     onActivation = {
-      autoUpdate = false;
+      autoUpdate = true;
+      upgrade = true;
       # 'zap': uninstalls all formulae(and related files) not listed here.
       cleanup = "zap";
     };

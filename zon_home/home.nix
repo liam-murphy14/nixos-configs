@@ -32,7 +32,7 @@
     zsh_common.homeDirectoryPath = config.zon_home.homeDirectoryPath;
     zsh_common.extraPreInit = config.zon_home.extraPreInit;
     zsh_common.extraInitExtra = ''
-      export PATH=$PATH:$HOME/.toolbox/bin
+      export PATH=$PATH:$HOME/.toolbox/bin:$HOME/.aim/mcp-servers
       if [ -e ${config.zon_home.homeDirectoryPath}/.brazil_completion/zsh_completion ]; then source ${config.zon_home.homeDirectoryPath}/.brazil_completion/zsh_completion; fi
       if [ -e ${config.zon_home.homeDirectoryPath}/.nix-profile/etc/profile.d/nix.sh ]; then . ${config.zon_home.homeDirectoryPath}/.nix-profile/etc/profile.d/nix.sh; fi
       export PATH=$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH
@@ -43,6 +43,8 @@
       brca = "brazil-recursive-cmd --allPackages";
       auth = "mwinit -o -s";
     };
+
+    my_python.extraPackages = ps: with ps; [ boto3 ];
 
     home.packages = with pkgs; [
       zoxide
