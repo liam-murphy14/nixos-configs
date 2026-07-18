@@ -145,6 +145,7 @@ in
         jdt-language-server
         lombok
         rust-analyzer
+        texlab
       ];
     };
   };
