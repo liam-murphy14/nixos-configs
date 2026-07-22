@@ -63,11 +63,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762104073,
-        "narHash": "sha256-XBtMNUQ9Hjp5Nq+Tut/AtrOc9igYEb/VSvESHJRL53Y=",
+        "lastModified": 1784695771,
+        "narHash": "sha256-WTXSEPbPxKqEFxamTDJ1miNhwEQw7qNw9mty5cWEHig=",
         "owner": "liam-murphy14",
         "repo": "python_serverless_housefire",
-        "rev": "147cf501242cd33b056c777d373c3d41f3911cd6",
+        "rev": "bfa3dcffa521ec9392d7a56571eaf88e7840eec6",
         "type": "github"
       },
       "original": {
