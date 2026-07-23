@@ -67,11 +67,14 @@ backup_cluster() {
   local server_major
   local backup_dir
   local dump_file
+  local partial_file
 
   require_root
   require_command sudo
   require_command systemctl
   require_command date
+  require_command install
+  require_command mv
   require_major "$old_major"
 
   systemctl is-active --quiet postgresql \
@@ -86,12 +89,16 @@ backup_cluster() {
 
   backup_dir="$BACKUP_ROOT/$(timestamp)-postgresql-$old_major"
   dump_file="$backup_dir/postgresql-$old_major-all.sql"
+  partial_file="$dump_file.partial"
   install -d -o root -g root -m 700 "$backup_dir"
+  [[ ! -e "$dump_file" && ! -e "$partial_file" ]] \
+    || die "backup output already exists: $dump_file"
 
   printf 'Creating complete logical backup at %s\n' "$dump_file"
-  as_postgres "$pg_dumpall_bin" --quote-all-identifiers >"$dump_file"
-  chmod 600 "$dump_file"
-  [[ -s "$dump_file" ]] || die "backup file is empty: $dump_file"
+  install -o root -g root -m 600 /dev/null "$partial_file"
+  as_postgres "$pg_dumpall_bin" --quote-all-identifiers >"$partial_file"
+  [[ -s "$partial_file" ]] || die "backup file is empty: $partial_file"
+  mv -- "$partial_file" "$dump_file"
 
   printf '\nBackup complete. Keep this directory until the upgraded cluster has been validated:\n%s\n' "$backup_dir"
 }
