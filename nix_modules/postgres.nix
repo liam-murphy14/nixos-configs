@@ -25,7 +25,7 @@
   config = {
     services.postgresql = {
       enable = true;
-      package = pkgs.postgresql_16;
+      package = pkgs.postgresql_18;
       identMap = ''
         # ArbitraryMapName systemUser DBUser
            superuser_map      postgres  postgres
