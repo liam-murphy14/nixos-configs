@@ -250,8 +250,9 @@ Validate and start the new service:
   sudo -u postgres $new_bin/psql --no-psqlrc -l
   systemctl start pgbouncer
 
-After application validation, refresh planner statistics with:
-  sudo -u postgres $work_dir/analyze_new_cluster.sh
+Refresh planner statistics with:
+  sudo -u postgres /run/current-system/sw/bin/vacuumdb --all --analyze-in-stages --missing-stats-only
+  sudo -u postgres /run/current-system/sw/bin/vacuumdb --all --analyze-only
 
 Do not run delete_old_cluster.sh until the new service and every application
 have been validated and the logical backup has been tested or retained.
