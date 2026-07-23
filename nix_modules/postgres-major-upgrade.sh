@@ -59,6 +59,14 @@ checksum_version() {
     | awk -F: '/Data page checksum version/ { gsub(/^[[:space:]]+/, "", $2); print $2; exit }'
 }
 
+pg_major_from_bin() {
+  local pg_bin="$1"
+  local version
+
+  version="$("$pg_bin/pg_upgrade" --version | awk '{ print $NF }')"
+  printf '%s\n' "${version%%.*}"
+}
+
 backup_cluster() {
   local old_major="$1"
   local psql_bin
@@ -75,6 +83,7 @@ backup_cluster() {
   require_command date
   require_command install
   require_command mv
+  require_command awk
   require_major "$old_major"
 
   systemctl is-active --quiet postgresql \
@@ -139,7 +148,7 @@ migrate_cluster() {
 
   [[ -x "$new_bin/pg_upgrade" ]] \
     || die "new PostgreSQL binaries are not in $new_bin; activate the PostgreSQL $new_major NixOS configuration first"
-  new_package_major="$("$new_bin/pg_config" --major-version)"
+  new_package_major="$(pg_major_from_bin "$new_bin")"
   [[ "$new_package_major" == "$new_major" ]] \
     || die "current system PostgreSQL is major $new_package_major, not $new_major"
 
@@ -147,7 +156,7 @@ migrate_cluster() {
   old_store_path="$(nix build --no-link --print-out-paths "nixpkgs#postgresql_${old_major}.out")"
   old_bin="$old_store_path/bin"
   [[ -x "$old_bin/pg_upgrade" ]] || die "old pg_upgrade binaries not found in $old_bin"
-  old_package_major="$("$old_bin/pg_config" --major-version)"
+  old_package_major="$(pg_major_from_bin "$old_bin")"
   [[ "$old_package_major" == "$old_major" ]] \
     || die "resolved old PostgreSQL package is major $old_package_major, not $old_major"
 
