@@ -36,6 +36,9 @@
       if [ -e ${config.zon_home.homeDirectoryPath}/.brazil_completion/zsh_completion ]; then source ${config.zon_home.homeDirectoryPath}/.brazil_completion/zsh_completion; fi
       if [ -e ${config.zon_home.homeDirectoryPath}/.nix-profile/etc/profile.d/nix.sh ]; then . ${config.zon_home.homeDirectoryPath}/.nix-profile/etc/profile.d/nix.sh; fi
       export PATH=$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH
+      eval "$(fnm env --use-on-cd --shell zsh)"
+      fnm use system
+      fnm default system
     '';
     zsh_common.extraShellAliases = {
       bb = "brazil-build";
@@ -53,6 +56,7 @@
       nerd-fonts.fira-code
       zstd
       nodejs_latest
+      fnm
     ];
 
     fonts.fontconfig.enable = true;
