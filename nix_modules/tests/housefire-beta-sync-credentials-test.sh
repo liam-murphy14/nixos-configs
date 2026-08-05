@@ -70,3 +70,29 @@ if PATH="$test_dir:$PATH" HOUSEFIRE_USERLIST_PATH="$duplicate_userlist" HOUSEFIR
   printf 'credential sync accepted duplicate housefire_beta entries\n' >&2
   exit 1
 fi
+
+urlsafe_userlist="$test_dir/urlsafe-verifier.txt"
+printf '%s\n' '"housefire_beta" "SCRAM-SHA-256$4096:c2FsdC1iZXRh-$BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC="' > "$urlsafe_userlist"
+urlsafe_sql_output="$test_dir/urlsafe-sql.txt"
+: > "$urlsafe_sql_output"
+if PATH="$test_dir:$PATH" HOUSEFIRE_USERLIST_PATH="$urlsafe_userlist" HOUSEFIRE_TEST_SQL="$urlsafe_sql_output" bash "$script"; then
+  printf 'credential sync accepted a URL-safe Base64 character in the verifier\n' >&2
+  exit 1
+fi
+if [[ -s "$urlsafe_sql_output" ]]; then
+  printf 'credential sync sent SQL for a verifier with a URL-safe Base64 character\n' >&2
+  exit 1
+fi
+
+malformed_padding_userlist="$test_dir/malformed-padding-verifier.txt"
+printf '%s\n' '"housefire_beta" "SCRAM-SHA-256$4096:c2FsdC1iZXRh$BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB==:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC="' > "$malformed_padding_userlist"
+malformed_padding_sql_output="$test_dir/malformed-padding-sql.txt"
+: > "$malformed_padding_sql_output"
+if PATH="$test_dir:$PATH" HOUSEFIRE_USERLIST_PATH="$malformed_padding_userlist" HOUSEFIRE_TEST_SQL="$malformed_padding_sql_output" bash "$script"; then
+  printf 'credential sync accepted malformed Base64 padding in the verifier\n' >&2
+  exit 1
+fi
+if [[ -s "$malformed_padding_sql_output" ]]; then
+  printf 'credential sync sent SQL for a verifier with malformed Base64 padding\n' >&2
+  exit 1
+fi
