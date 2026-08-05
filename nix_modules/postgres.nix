@@ -14,7 +14,7 @@
       };
       extraAuthLines = lib.mkOption {
         default = "";
-        type = lib.types.str;
+        type = lib.types.lines;
       };
       pgbouncerDatabases = lib.mkOption {
         default = { };

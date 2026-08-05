@@ -23,6 +23,14 @@ assert_contains "$script" '--no-owner'
 assert_contains "$script" '--no-acl'
 assert_contains "$script" 'set -o pipefail'
 
+module="$script_dir/housefire_beta.nix"
+test -f "$module"
+grep -Fq -- 'ensureDatabases = lib.mkAfter [ "housefire_beta" ]' "$module"
+grep -Fq -- 'name = "housefire_beta"' "$module"
+grep -Fq -- 'connection_limit = 5' "$module"
+grep -Fq -- 'pgbouncerDatabases.housefire_beta' "$module"
+grep -Fq -- 'housefire-beta-sync-credentials.service' "$module"
+
 pipeline_segment="$(
   sed -n '/runuser --user postgres -- pg_dump/,/--role="\$beta_role"/p' "$script" |
     tr '\n' ' ' |
