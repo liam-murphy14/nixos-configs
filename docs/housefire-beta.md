@@ -40,13 +40,16 @@ At the `psql` prompt, use PostgreSQL’s password prompt, then exit:
 \q
 ```
 
-Retrieve the resulting verifier only into a temporary mode-600 file for
-immediate encrypted-userlist editing. This command redirects the value; it
-does not print it:
+Retrieve the resulting verifier only into a short-lived, mode-600 temporary
+file for immediate encrypted-userlist editing. This file is the sole
+exception to the rule against unencrypted verifier storage, and it is removed
+automatically if the shell exits or receives an interruption signal. This
+command redirects the value; it does not print it:
 
 ```sh
 verifier_file="$(mktemp)"
 chmod 600 "$verifier_file"
+trap 'rm -f -- "$verifier_file"' EXIT HUP INT TERM
 sudo -u postgres psql --no-psqlrc -Atqc \
   "SELECT rolpassword FROM pg_authid WHERE rolname = 'housefire_beta';" \
   > "$verifier_file"
@@ -55,7 +58,8 @@ sudo -u postgres psql --no-psqlrc -Atqc \
 Open the encrypted userlist with `sops rbpi/secrets/housefire_userlist.txt`
 and add one `housefire_beta` entry in the same quoted userlist format as the
 existing entry. Transfer the verifier from the temporary file without
-printing it, save the encrypted file, then remove the temporary file:
+printing it, save the encrypted file, then explicitly remove the temporary
+file:
 
 ```sh
 rm -- "$verifier_file"
