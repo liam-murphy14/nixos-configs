@@ -50,3 +50,9 @@ if grep -Eq -- '(^|[^[:alnum:]_])housefire([^[:alnum:]_]|$)' "$script"; then
   printf 'refresh script contains a standalone production database target\n' >&2
   exit 1
 fi
+
+flake="$script_dir/../flake.nix"
+secrets="$script_dir/../rbpi/secrets.nix"
+grep -Fq -- './nix_modules/housefire_beta.nix' "$flake"
+grep -Fq -- 'group = "pgbouncer"' "$secrets"
+grep -Fq -- 'housefire-beta-sync-credentials.service' "$secrets"

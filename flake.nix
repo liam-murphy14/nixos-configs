@@ -74,6 +74,7 @@
             }
             sops-nix.nixosModules.sops
             ./nix_modules/housefire.nix
+            ./nix_modules/housefire_beta.nix
             ./nix_modules/ddns.nix
             {
               ddns.recordName = "rbpi.liammurphydev.com";

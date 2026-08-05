@@ -16,9 +16,14 @@
   sops.secrets.housefireUserlist = {
     format = "binary";
     sopsFile = ./secrets/housefire_userlist.txt;
-    owner = "pgbouncer";
+    owner = "postgres";
+    group = "pgbouncer";
+    mode = "0440";
     path = "/var/lib/pgbouncer/userlist.txt";
-    restartUnits = [ "pgbouncer.service" ];
+    restartUnits = [
+      "pgbouncer.service"
+      "housefire-beta-sync-credentials.service"
+    ];
   };
 
   sops.secrets.rustyDdnsCloudflareToken = {
