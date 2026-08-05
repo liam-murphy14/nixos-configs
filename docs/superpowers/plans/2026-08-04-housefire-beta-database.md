@@ -553,14 +553,18 @@ At the `psql` prompt, run:
 \q
 ```
 
-Retrieve the verifier directly to the terminal, without redirecting it to a log:
+Capture the verifier in a mode-600 temporary file instead of printing it:
 
 ```sh
+verifier_file="$(mktemp)"
+chmod 600 "$verifier_file"
 sudo -u postgres psql --no-psqlrc -Atqc \
-  "SELECT rolpassword FROM pg_authid WHERE rolname = 'housefire_beta';"
+  "SELECT rolpassword FROM pg_authid WHERE rolname = 'housefire_beta';" \
+  > "$verifier_file"
+printf 'SCRAM verifier saved in %s for encrypted-userlist editing\n' "$verifier_file"
 ```
 
-Use `sops rbpi/secrets/housefire_userlist.txt` to add one `housefire_beta` line in the same quoted userlist format as the production entry, using that verifier. Save the encrypted file and do not paste the verifier into Git-tracked files, shell history, commit messages, or documentation.
+Use a local editor with `sops rbpi/secrets/housefire_userlist.txt` to add one `housefire_beta` line in the same quoted userlist format as the production entry, reading the verifier from the temporary file without printing it. Save the encrypted file, then remove the temporary file with `rm -- "$verifier_file"`. Do not paste the verifier into Git-tracked files, shell history, commit messages, or documentation.
 
 - [ ] **Step 4: Add test assertions for host wiring**
 
@@ -633,7 +637,7 @@ sudo nixos-rebuild switch --flake .#rbpi-nixos
 
 ## Configure the beta credential
 
-Choose the beta role password interactively with PostgreSQL’s `\\password` command. Retrieve its SCRAM verifier only in the terminal, add it as a second entry in the encrypted `rbpi/secrets/housefire_userlist.txt` userlist with `sops`, and restart the credential-sync and PgBouncer units if SOPS did not restart them automatically:
+Choose the beta role password interactively with PostgreSQL’s `\\password` command. Capture its SCRAM verifier in a mode-600 temporary file, add it as a second entry in the encrypted `rbpi/secrets/housefire_userlist.txt` userlist with `sops`, remove the temporary file, and restart the credential-sync and PgBouncer units if SOPS did not restart them automatically:
 
 ```sh
 sudo systemctl restart housefire-beta-sync-credentials.service
