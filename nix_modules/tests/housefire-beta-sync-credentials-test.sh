@@ -16,6 +16,25 @@ EOF
 cat > "$test_dir/runuser" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
+
+if (($# < 3)) || [[ "$1" != '--user' ]] || [[ "$2" != 'postgres' ]]; then
+  printf 'fake runuser expected --user postgres\n' >&2
+  exit 1
+fi
+shift 2
+
+psql_seen=false
+for arg in "$@"; do
+  if [[ "$arg" == 'psql' || "$arg" == */psql ]]; then
+    psql_seen=true
+    break
+  fi
+done
+if [[ "$psql_seen" != true ]]; then
+  printf 'fake runuser expected a psql invocation\n' >&2
+  exit 1
+fi
+
 cat > "$HOUSEFIRE_TEST_SQL"
 EOF
 chmod +x "$test_dir/runuser"
