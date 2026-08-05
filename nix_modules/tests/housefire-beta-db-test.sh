@@ -53,6 +53,42 @@ fi
 
 flake="$script_dir/../flake.nix"
 secrets="$script_dir/../rbpi/secrets.nix"
-grep -Fq -- './nix_modules/housefire_beta.nix' "$flake"
-grep -Fq -- 'group = "pgbouncer"' "$secrets"
-grep -Fq -- 'housefire-beta-sync-credentials.service' "$secrets"
+
+rbpi_module_list="$({
+  sed -n '/rbpi-nixos =/,/darwinConfigurations =/p' "$flake" |
+    sed -n '/modules = \[/,/^[[:space:]]*\];/p'
+} | tr '\n' ' ' | sed -E 's/[[:space:]]+/ /g')"
+expected_module_sequence='./nix_modules/housefire.nix ./nix_modules/housefire_beta.nix ./nix_modules/ddns.nix'
+if ! grep -Fq -- "$expected_module_sequence" <<< "$rbpi_module_list"; then
+  printf 'rbpi-nixos modules do not contain the required adjacent housefire module sequence\n' >&2
+  exit 1
+fi
+
+if [[ "$(grep -Fc -- './nix_modules/housefire_beta.nix' "$flake")" -ne 1 ]]; then
+  printf 'flake.nix must import housefire_beta.nix exactly once\n' >&2
+  exit 1
+fi
+
+darwin_section="$(sed -n '/darwinConfigurations =/,/homeConfigurations =/p' "$flake")"
+home_section="$(sed -n '/homeConfigurations =/,$p' "$flake")"
+if grep -Fq -- './nix_modules/housefire_beta.nix' <<< "$darwin_section" ||
+  grep -Fq -- './nix_modules/housefire_beta.nix' <<< "$home_section"; then
+  printf 'housefire_beta.nix must not occur in Darwin or Home Manager configurations\n' >&2
+  exit 1
+fi
+
+userlist_block="$(sed -n '/sops\.secrets\.housefireUserlist = {/,/^  };/p' "$secrets")"
+for required_value in \
+  'format = "binary";' \
+  'sopsFile = ./secrets/housefire_userlist.txt;' \
+  'owner = "postgres";' \
+  'group = "pgbouncer";' \
+  'mode = "0440";' \
+  'path = "/var/lib/pgbouncer/userlist.txt";' \
+  '"pgbouncer.service"' \
+  '"housefire-beta-sync-credentials.service"'; do
+  if ! grep -Fq -- "$required_value" <<< "$userlist_block"; then
+    printf 'missing required housefireUserlist value: %s\n' "$required_value" >&2
+    exit 1
+  fi
+done
