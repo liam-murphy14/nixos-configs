@@ -21,9 +21,22 @@ assert_contains "$script" 'CREATE DATABASE "housefire_beta" OWNER "housefire_bet
 assert_contains "$script" 'pg_dump'
 assert_contains "$script" '--no-owner'
 assert_contains "$script" '--no-acl'
-assert_contains "$script" "  | runuser --user postgres -- psql \\"
-assert_contains "$script" '--role="$beta_role"'
 assert_contains "$script" 'set -o pipefail'
+
+pipeline_segment="$(
+  sed -n '/runuser --user postgres -- pg_dump/,/--role="\$beta_role"/p' "$script" |
+    tr '\n' ' ' |
+    sed -e 's/\\[[:space:]]*/ /g' -e 's/[[:space:]][[:space:]]*/ /g'
+)"
+expected_pipeline='runuser --user postgres -- pg_dump --dbname="$production_database" --no-owner --no-acl | runuser --user postgres -- psql'
+if ! grep -Fq -- "$expected_pipeline" <<< "$pipeline_segment"; then
+  printf 'refresh script does not contain the expected direct dump-to-psql pipeline\n' >&2
+  exit 1
+fi
+if ! grep -Fq -- '--role="$beta_role"' <<< "$pipeline_segment"; then
+  printf 'refresh script does not associate the direct pipeline with beta role\n' >&2
+  exit 1
+fi
 
 if grep -Eq -- '(^|[^[:alnum:]_])housefire([^[:alnum:]_]|$)' "$script"; then
   printf 'refresh script contains a standalone production database target\n' >&2
