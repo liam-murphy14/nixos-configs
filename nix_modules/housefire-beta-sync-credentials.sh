@@ -27,7 +27,7 @@ verifier="$(
   ' "$userlist_path"
 )" || die "userlist must contain exactly one ${beta_role} entry"
 
-if ! printf '%s\n' "$verifier" | grep -Eq '^SCRAM-SHA-256\$[0-9]+:([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})\$([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4}):([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$'; then
+if ! printf '%s\n' "$verifier" | grep -Eq '^SCRAM-SHA-256[$][0-9]+:([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})[$]([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4}):([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$'; then
   die "userlist entry for ${beta_role} is not a valid SCRAM verifier"
 fi
 

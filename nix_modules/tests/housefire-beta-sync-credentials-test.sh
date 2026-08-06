@@ -41,6 +41,12 @@ chmod +x "$test_dir/runuser"
 
 test -f "$script"
 bash -n "$script"
+if command -v shellcheck >/dev/null 2>&1; then
+  shellcheck "$script"
+elif grep -Fq -- '\$[' "$script"; then
+  printf 'SCRAM verifier regex contains a ShellCheck SC2016 trigger\n' >&2
+  exit 1
+fi
 PATH="$test_dir:$PATH" \
   HOUSEFIRE_USERLIST_PATH="$userlist" \
   HOUSEFIRE_TEST_SQL="$sql_output" \
