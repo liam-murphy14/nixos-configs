@@ -58,7 +58,6 @@
       "discord"
       "rustrover"
       "google-chrome"
-      "chromedriver"
     ];
   };
 }
