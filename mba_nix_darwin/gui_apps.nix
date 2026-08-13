@@ -57,7 +57,7 @@
       "vlc"
       "discord"
       "rustrover"
-      "google-chrome"
+      "ungoogled-chromium"
     ];
   };
 }
